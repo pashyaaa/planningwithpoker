@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "coco-6c8a7": {
+      "hosting": {
+        "app": [
+          "coco-6c8a7"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "coco-6c8a7"
+  }
+}

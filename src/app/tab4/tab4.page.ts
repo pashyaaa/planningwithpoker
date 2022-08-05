@@ -4,11 +4,11 @@ import { OverlayEventDetail } from '@ionic/core';
 import { DataService } from '../services/data.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-tab4',
+  templateUrl: 'tab4.page.html',
+  styleUrls: ['tab4.page.scss']
 })
-export class Tab1Page {
+export class Tab4Page {
 
   @ViewChild(IonModal) modal: IonModal;
   tasks:any = [];
@@ -19,10 +19,10 @@ export class Tab1Page {
     private dataService:DataService
   )
   {
-    this.dataService.getTasks("Critical").subscribe(res=>{
+    this.dataService.getTasks("Uncategorized").subscribe(res=>{
       this.tasks = [];
       res.forEach(task => {
-        if(task.type == 'Critical' && task.completed_date == undefined )
+        if(task.type == 'Uncategorized' && task.completed_date == undefined )
         {
           this.tasks.push(task);
         }
@@ -75,4 +75,5 @@ export class Tab1Page {
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
+
 }
