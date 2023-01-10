@@ -14,7 +14,7 @@
   </ion-header>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button id="open-modal">
+    <ion-fab-button id="open-modal4">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -31,7 +31,6 @@
     </ion-item-options>
 
     <ion-item>
-      <ion-icon name="copy-outline"></ion-icon>
       <ion-label>{{task.title}}</ion-label>
     </ion-item>
 
@@ -42,7 +41,7 @@
     </ion-item-options>
   </ion-item-sliding>
 
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)" [isOpen]="isModalOpen">
+  <ion-modal trigger="open-modal4" (willDismiss)="onWillDismiss($event)" [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>

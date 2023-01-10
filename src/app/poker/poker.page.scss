@@ -1,0 +1,139 @@
+.table{
+    width:300px;
+    height:180px;
+    background-color:#53b6f89d;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+
+.center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.average{
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,-60%);
+}
+
+.player-box{
+    position:absolute;
+    width:60px;
+    height:90px;
+    text-align: center;
+    justify-content: center;  
+}
+
+.player{
+    display: table;
+    background-color:#ffffff;
+    border-radius: 5px;
+    width: 100%;
+    height: 90%;
+}
+
+.vote{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.player1{
+    top:30%;
+    left:50%;
+    transform:translate(-50%,-70%);
+}
+
+.player2{
+    top:70%;
+    left:50%;
+    transform:translate(-50%,-30%);
+}
+
+.player3{
+    top:50%;
+    left:30%;
+    transform:translate(-70%,-50%);
+}
+
+.player4{
+    top:50%;
+    left:70%;
+    transform:translate(-30%,-50%);
+}
+
+.player5{
+    top:30%;
+    left:40%;
+    transform:translate(-60%,-70%);
+}
+
+.player6{
+    top:70%;
+    left:60%;
+    transform:translate(-40%,-30%);
+}
+
+.player7{
+    top:30%;
+    left:60%;
+    transform:translate(-40%,-70%);
+}
+
+.player8{
+    top:70%;
+    left:40%;
+    transform:translate(-60%,-30%);
+}
+
+.player9{
+    top:35%;
+    left:32%;
+    transform:translate(-68%,-65%);
+}
+
+.player10{
+    top:65%;
+    left:68%;
+    transform:translate(-32%,-35%);
+}
+
+.player11{
+    top:35%;
+    left:68%;
+    transform:translate(-32%,-65%);
+}
+
+.player12{
+    top:65%;
+    left:32%;
+    transform:translate(-68%,-35%);
+}
+
+
+.cards{
+    position:absolute;
+    top:85%;
+    left:50%;
+    transform:translate(-50%,-15%);
+    display: flex;
+}
+
+.card{
+    width:50px;
+    height:80px;
+    border-style: solid;
+    border-color: #182ef89d;
+    border-width: 2px;
+    border-radius: 5px;
+}

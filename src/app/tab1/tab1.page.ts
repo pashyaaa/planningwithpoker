@@ -19,6 +19,7 @@ export class Tab1Page {
     private dataService:DataService
   )
   {
+    this.resetTask();
     this.dataService.getTasks("Critical").subscribe(res=>{
       this.tasks = [];
       res.forEach(task => {
@@ -47,7 +48,7 @@ export class Tab1Page {
   }
 
   done(task:any){
-    this.dataService.editTask(task);
+    this.dataService.doneTask(task);
   }
 
   cancel() {
@@ -66,13 +67,18 @@ export class Tab1Page {
       this.task.title = ev.detail.data.title;
       this.task.type = ev.detail.data.type;
       this.add(this.task);
-      this.task = {};
+      this.resetTask();
     }else{
-      this.task = {};
+      this.resetTask();
     }
   }
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
+  }
+
+  resetTask(){
+    this.task = {};
+    this.task.type = 'Critical';
   }
 }

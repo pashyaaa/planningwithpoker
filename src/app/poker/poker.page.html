@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">{{game?.name}}</ion-title>
+    <ion-title slot="end" (click)="editPlayer(this.playerId)">{{player?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class='table'></div>
+  <p class='average' *ngIf="curRound && curRound.isReveled">Average : {{getAverage()}}</p>
+  <p class='center' *ngIf="curRound && votes?.length == 0">Pick your cards!</p>
+  <ion-button class='center' *ngIf="curRound && !curRound.isReveled && votes?.length > 0" (click)="reveal()">Reveal</ion-button>
+  <ion-button class='center' *ngIf="curRound && curRound.isReveled && votes?.length > 0" (click)="reset()">Reset</ion-button>
+  <div *ngFor="let player of players; index as i" [ngClass]="['player-box','player'+(i+1)]">
+    <div class='player' [style.background-color]="playerColor(player)">
+      <div class="vote" *ngIf="curRound && curRound.isReveled">{{getVote(player?.id)}}</div>
+    </div>
+    <div>{{player?.name}}</div>
+  </div>
+
+  <div class='cards'>
+    <ion-button class='card' [color]="curVote == 0 ? 'primary' : 'light'" (click)="vote(0)">0</ion-button>
+    <ion-button class='card' [color]="curVote == 1 ? 'primary' : 'light'" (click)="vote(1)">1</ion-button>
+    <ion-button class='card' [color]="curVote == 2 ? 'primary' : 'light'" (click)="vote(2)">2</ion-button>
+    <ion-button class='card' [color]="curVote == 3 ? 'primary' : 'light'" (click)="vote(3)">3</ion-button>
+    <ion-button class='card' [color]="curVote == 5 ? 'primary' : 'light'" (click)="vote(5)">5</ion-button>
+    <ion-button class='card' [color]="curVote == 8 ? 'primary' : 'light'" (click)="vote(8)">8</ion-button>
+    <ion-button class='card' [color]="curVote == 13 ? 'primary' : 'light'" (click)="vote(13)">13</ion-button>
+  </div>
+  
+</ion-content>
