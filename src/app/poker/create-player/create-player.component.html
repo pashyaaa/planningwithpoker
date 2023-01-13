@@ -3,13 +3,12 @@
     Create Player
   </ion-card-header>
   <ion-card-content>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (submit)="save()">
       <ion-item lines="full">
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text" formControlName="name" required></ion-input>
       </ion-item>
-      <ion-button *ngIf="this.action == 0" shape="round" expand="block" (click)="save()">Save</ion-button>
-      <ion-button *ngIf="this.action == 1" shape="round" expand="block" (click)="edit()">Save</ion-button>
+      <ion-button shape="round" expand="block" type="submit" [disabled]="saveClicked">Save</ion-button>
     </form>
   </ion-card-content>
 </ion-card>

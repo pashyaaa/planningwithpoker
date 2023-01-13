@@ -21,6 +21,9 @@ export class PokerPage implements OnInit {
   curRound:any = {};
   votes = [];
   curVote = -99;
+  numberSeries = [[1,2,3,4,5,6,7,8,9,10],[0,1,2,3,5,8,13]];
+  selectedNumberSeries = [0,1,2,3,5,8,13];
+  //selectedNumberSeries = [1,2,3,4,5,6,7,8,9,10];
 
   constructor(
     private route: ActivatedRoute,
@@ -143,6 +146,7 @@ export class PokerPage implements OnInit {
         popoverController: this.popoverController,
         gameId: this.gameId,
         playerId: playerId,
+        playerName: this.player.name,
         action: 1
       },
       translucent: true,
@@ -181,8 +185,10 @@ export class PokerPage implements OnInit {
     console.log(vote)
     console.log(this.curRound.id)
     console.log(this.playerId)
-    this.curVote = vote;
-    this.dataService.addVote(this.gameId, this.curRound.id, this.playerId, vote);
+    if(this.curRound && !this.curRound.isReveled){
+      this.curVote = vote;
+      this.dataService.addVote(this.gameId, this.curRound.id, this.playerId, vote);
+    }
   }
 
   playerColor(player:any){
@@ -234,6 +240,13 @@ export class PokerPage implements OnInit {
     for (let i = 0; i < this.votes.length; ++i) {
         sum += this.votes[i].vote;
     }
-    return sum / this.votes.length;
+    let avg = sum / this.votes.length;
+    return Math.round(avg * 10) / 10;
+  }
+
+  votesFor(vote:number){
+    let filteredVotes = this.votes.filter(res=>{return res.vote==vote});
+    console.log(filteredVotes)
+    return filteredVotes;
   }
 }

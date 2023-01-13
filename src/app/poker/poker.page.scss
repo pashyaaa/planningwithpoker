@@ -20,6 +20,13 @@
     transform:translate(-50%,-50%);
 }
 
+.center1{
+    position:absolute;
+    top:55%;
+    left:50%;
+    transform:translate(-50%,-45%);
+}
+
 .average{
     position:absolute;
     top:40%;
@@ -136,4 +143,26 @@
     border-color: #182ef89d;
     border-width: 2px;
     border-radius: 5px;
+}
+
+.count-cards{
+    position:absolute;
+    top:85%;
+    left:10%;
+    transform:translate(-90%,-15%);
+    display: flex;
+}
+
+.count-card{
+    width:50px;
+    height:80px;
+    text-align: center;
+}
+
+.count-cards-votes{
+    position:absolute;
+    top:80%;
+    left:10%;
+    transform:translate(-90%,-20%);
+    display: flex;
 }
