@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { DataService } from '../services/data.service';
 import { CreatePlayerComponent } from './create-player/create-player.component';
 import { collectionData, Firestore, doc, setDoc, deleteDoc, getDoc, onSnapshot } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
+import { CreateGameComponent } from './create-game/create-game.component';
 
 @Component({
   selector: 'app-poker',
   templateUrl: './poker.page.html',
   styleUrls: ['./poker.page.scss'],
 })
-export class PokerPage implements OnInit {
+export class PokerPage implements OnInit, OnDestroy {
 
   gameId:any;
   game:any;
@@ -21,9 +22,9 @@ export class PokerPage implements OnInit {
   curRound:any = {};
   votes = [];
   curVote = -99;
-  numberSeries = [[1,2,3,4,5,6,7,8,9,10],[0,1,2,3,5,8,13]];
-  selectedNumberSeries = [0,1,2,3,5,8,13];
-  //selectedNumberSeries = [1,2,3,4,5,6,7,8,9,10];
+  numberSeries = [[1,2,3,4,5],[0,1,2,3,5,8,13]];
+  //selectedNumberSeries = [0,1,2,3,5,8,13];
+  selectedNumberSeries = [1,2,3,4,5];
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +34,10 @@ export class PokerPage implements OnInit {
   ) 
   { 
 
+  }
+
+  ngOnDestroy(): void {
+    console.log("Destroy")
   }
 
   async ngOnInit() {
@@ -162,6 +167,21 @@ export class PokerPage implements OnInit {
     return await popover.present();
   }
 
+  async editGame(){
+    console.log(this.game.name)
+    const popover = await this.popoverController.create({
+      component: CreateGameComponent,
+      componentProps: {
+        popoverController: this.popoverController,
+        gameId: this.gameId,
+        gameName: this.game.name,
+        action: 1
+      },
+      translucent: true,
+    });
+    return await popover.present();
+  }
+
   reveal(){
     this.dataService.editRound(this.gameId, this.curRound.id, true).then(
       res => {
@@ -196,10 +216,10 @@ export class PokerPage implements OnInit {
       if(this.isVoted(player.id)){
         return '#0099ff9d'
       }else{
-        return '#f853539d'
+        return '#D3D3D3'
       }
     }else{
-      return '#ffffff'
+      return 'light'
     }
   }
 

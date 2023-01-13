@@ -1,7 +1,7 @@
 .table{
-    width:300px;
-    height:180px;
-    background-color:#53b6f89d;
+    width:350px;
+    height:150px;
+    background-color:var(--ion-color-secondary);
     position:absolute;
     top:50%;
     left:50%;
@@ -15,9 +15,9 @@
 
 .center{
     position:absolute;
-    top:50%;
+    top:48%;
     left:50%;
-    transform:translate(-50%,-50%);
+    transform:translate(-50%,-52%);
 }
 
 .center1{
@@ -36,18 +36,19 @@
 
 .player-box{
     position:absolute;
-    width:60px;
+    width:70px;
     height:90px;
     text-align: center;
     justify-content: center;  
 }
 
 .player{
-    display: table;
-    background-color:#ffffff;
-    border-radius: 5px;
     width: 100%;
     height: 90%;
+    display: table;
+    border-radius: 5px;
+    border-color: var(--ion-color-tertiary);
+    border-width: 2px;
 }
 
 .vote{
@@ -140,7 +141,7 @@
     width:50px;
     height:80px;
     border-style: solid;
-    border-color: #182ef89d;
+    border-color: var(--ion-color-tertiary);
     border-width: 2px;
     border-radius: 5px;
 }
@@ -148,8 +149,8 @@
 .count-cards{
     position:absolute;
     top:85%;
-    left:10%;
-    transform:translate(-90%,-15%);
+    left:25%;
+    transform:translate(-75%,-15%);
     display: flex;
 }
 
@@ -162,7 +163,7 @@
 .count-cards-votes{
     position:absolute;
     top:80%;
-    left:10%;
-    transform:translate(-90%,-20%);
+    left:25%;
+    transform:translate(-75%,-20%);
     display: flex;
 }
