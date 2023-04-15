@@ -36,7 +36,7 @@
 
 .player-box{
     position:absolute;
-    width:70px;
+    width:60px;
     height:90px;
     text-align: center;
     justify-content: center;  
@@ -49,6 +49,12 @@
     border-radius: 5px;
     border-color: var(--ion-color-tertiary);
     border-width: 2px;
+}
+
+.player-name{
+    font-size: smaller;
+    font-weight: 200;
+    margin-top: 5px;
 }
 
 .vote{

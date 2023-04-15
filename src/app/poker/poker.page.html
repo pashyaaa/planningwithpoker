@@ -15,7 +15,7 @@
 
 <ion-content>
   <div class='table'></div>
-  <p class='average' *ngIf="curRound && curRound.isReveled">Average : {{getAverage()}}</p>
+  <p class='center' *ngIf="curRound && curRound.isReveled">Average : {{getAverage()}}</p>
   <p class='center' *ngIf="curRound && votes?.length == 0">Pick your cards!</p>
   <ion-button class='center' *ngIf="curRound && !curRound.isReveled && votes?.length > 0" (click)="reveal()">Reveal</ion-button>
   <ion-button class='center1' *ngIf="curRound && curRound.isReveled && votes?.length > 0" (click)="reset()">Reset</ion-button>
@@ -23,7 +23,10 @@
     <div class='player' [style.background-color]="playerColor(player)">
       <div class="vote" *ngIf="curRound && curRound.isReveled">{{getVote(player?.id)}}</div>
     </div>
-    <div>{{player?.name}}</div>
+    <!-- <ion-avatar [style.color]="playerColor(player)" >
+      <img alt="{{player?.name}}" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar> -->
+    <div class='player-name'>{{player?.name}}</div>
   </div>
 
   <div class='cards'>

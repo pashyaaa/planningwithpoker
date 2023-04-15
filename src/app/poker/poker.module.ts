@@ -8,6 +8,7 @@ import { PokerPageRoutingModule } from './poker-routing.module';
 
 import { PokerPage } from './poker.page';
 import { CreatePlayerComponent } from './create-player/create-player.component';
+import { CreateGameComponent } from './create-game/create-game.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { CreatePlayerComponent } from './create-player/create-player.component';
     PokerPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [PokerPage, CreatePlayerComponent]
+  declarations: [PokerPage, CreatePlayerComponent, CreateGameComponent]
 })
 export class PokerPageModule {}

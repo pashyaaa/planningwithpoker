@@ -2,7 +2,6 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { addDoc, collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PopoverController } from '@ionic/angular';
-import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-create-player',
@@ -23,7 +22,6 @@ export class CreatePlayerComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private firestore: Firestore,
-    private loader: LoaderService
   ) { }
 
   ngOnInit() {

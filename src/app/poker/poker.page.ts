@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { DataService } from '../services/data.service';
 import { CreatePlayerComponent } from './create-player/create-player.component';
@@ -30,7 +30,8 @@ export class PokerPage implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private dataService:DataService,
     private popoverController: PopoverController,
-    private firestore:Firestore
+    private firestore:Firestore,
+    private router: Router
   ) 
   { 
 
@@ -42,89 +43,104 @@ export class PokerPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.gameId = this.route.snapshot.paramMap.get('game_id')!;
-    
-    const getGame = onSnapshot(
-      this.dataService.getGame(this.gameId), 
-      (snapshot) => {
-        this.game = snapshot.data();
-        console.log(this.game)
-        if(this.game.cur_round == undefined || this.game.cur_round == '')
-        {
-          this.dataService.addRound(this.gameId).then(
-            async res => {
-              this.curRound.id = res.id;
-              console.log(res.id)
-              await this.dataService.editGame(this.gameId, this.curRound.id)
-            }
-          )
-        }
-        else
-        {
-          this.curRound.id = this.game.cur_round;
-        }
-
-        console.log(this.curRound.id)
-
-        const getRound = onSnapshot(
-          this.dataService.getRound(this.gameId, this.curRound.id), 
-          (snapshot) => {
-            this.curRound = snapshot.data();
-            this.curRound.id = snapshot.id;
-            console.log(this.curRound)
-    
-            const getVotes = onSnapshot(
-              this.dataService.getVotes(this.gameId, this.curRound.id), 
-              (snapshot) => {
-                this.votes = [];
-                snapshot.forEach((doc) => {
-                  const vote = doc.data();
-                  vote.id = doc.id;
-                  console.log(vote)
-                  this.votes.push(vote);
-                });
-                this.selectedVote(this.playerId);
-              },
-              (error) => {
-                // ...
-              });
-          });
-      },
-      (error) => {
-        // ...
-      });
-
-    this.playerId = localStorage.getItem(this.gameId);
-    if(this.playerId == null)
+    console.log(this.gameId)
+    if(this.gameId == null)
     {
-      this.createPlayer(this.gameId);
-    }else
-    {
-      this.player = (await this.dataService.getPlayer(this.gameId, this.playerId)).data();
-      console.log(this.player)
-      if(this.player == undefined){
-        this.createPlayer(this.gameId);
-      }
+      this.createGame();
     }
-
-    const getPlayers = onSnapshot(
-      this.dataService.getPlayers(this.gameId), 
-      (snapshot) => {
-        this.players = [];
-        snapshot.forEach((doc) => {
-          const player = doc.data();
-          player.id = doc.id;
-          console.log(player)
-          this.players.push(player);
+    else
+    {
+      const getGame = onSnapshot(
+        this.dataService.getGame(this.gameId), 
+        async (snapshot) => {
+          this.game = snapshot.data();
+          console.log(this.game)
+          console.log(this.game.cur_round)
+          if(this.game.cur_round == undefined || this.game.cur_round == '')
+          {
+            await this.dataService.addRound(this.gameId).then(
+              async res => {
+                this.curRound.id = res.id;
+                console.log(res.id)
+                await this.dataService.editGame(this.gameId, this.curRound.id)
+                this.getRound()
+              }
+            )
+          }
+          else
+          {
+            this.curRound.id = this.game.cur_round;
+            this.getRound()
+          }
+  
+          console.log(this.curRound.id)
+        },
+        (error) => {
+          // ...
         });
-      },
-      (error) => {
-        // ...
-      });
+  
+      this.playerId = localStorage.getItem(this.gameId);
+      if(this.playerId == null)
+      {
+        this.createPlayer(this.gameId);
+      }else
+      {
+        this.player = (await this.dataService.getPlayer(this.gameId, this.playerId)).data();
+        console.log(this.player)
+        if(this.player == undefined){
+          this.createPlayer(this.gameId);
+        }
+      }
+  
+      const getPlayers = onSnapshot(
+        this.dataService.getPlayers(this.gameId), 
+        (snapshot) => {
+          this.players = [];
+          snapshot.forEach((doc) => {
+            const player = doc.data();
+            player.id = doc.id;
+            console.log(player)
+            this.players.push(player);
+          });
+        },
+        (error) => {
+          // ...
+        });
+    }
+  }
+
+  getRound()
+  {
+    //Get Round and votes
+    const getRound = onSnapshot(
+      this.dataService.getRound(this.gameId, this.curRound.id), 
+      async (snapshot) => {
+        this.curRound = snapshot.data();
+        this.curRound.id = snapshot.id;
+        console.log(this.curRound)
+
+        const getVotes = onSnapshot(
+          this.dataService.getVotes(this.gameId, this.curRound.id), 
+          (snapshot) => {
+            this.votes = [];
+            snapshot.forEach((doc) => {
+              const vote = doc.data();
+              vote.id = doc.id;
+              console.log(vote)
+              this.votes.push(vote);
+            });
+            this.selectedVote(this.playerId);
+          },
+          (error) => {
+            // ...
+          });
+    });
   }
 
   async createPlayer(gameId){
     const popover = await this.popoverController.create({
       component: CreatePlayerComponent,
+      backdropDismiss: false,
       componentProps: {
         popoverController: this.popoverController,
         gameId: gameId,
@@ -162,6 +178,25 @@ export class PokerPage implements OnInit, OnDestroy {
         console.log(this.playerId)
         this.player = (await this.dataService.getPlayer(this.gameId, this.playerId)).data();
         console.log(this.player)
+      }
+    )
+    return await popover.present();
+  }
+
+  async createGame(){
+    const popover = await this.popoverController.create({
+      component: CreateGameComponent,
+      backdropDismiss: false,
+      componentProps: {
+        popoverController: this.popoverController,
+        action: 0
+      },
+      translucent: true,
+    });
+    popover.onDidDismiss().then(
+      async res=>{
+        this.gameId = res.data.gameId;
+        this.router.navigate(['poker/'+this.gameId])
       }
     )
     return await popover.present();

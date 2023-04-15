@@ -33,23 +33,29 @@ export class CreateGameComponent implements OnInit {
     }
   }
 
-  async save(){
+   save(){
     this.saveClicked = true;
+    console.log(this.form.get('name').value)
     if(this.action == 0) {
-      const player = {
+      const game = {
         name: this.form.get('name').value
       };
-      const playersRef = collection(this.firestore, 'games');
-      addDoc(playersRef, player).then(
-        (player)=>{
-          localStorage.setItem(this.gameId, player.id)
+      const gamesRef = collection(this.firestore, 'games');
+      
+      addDoc(gamesRef, game).then(
+        (game)=>{
           this.saveClicked = false;
-          this.popoverController.dismiss({playerId: player.id});
+          this.popoverController.dismiss({gameId: game.id});
         }
       )
     }else{
-      const playerRef = doc(this.firestore, 'games/'+this.gameId);
-      await updateDoc(playerRef, {name:this.form.get('name').value})
+      const gamesRef = doc(this.firestore, 'games/'+this.gameId);
+      updateDoc(gamesRef, {name:this.form.get('name').value}).then(
+        (player)=>{
+          this.saveClicked = false;
+          this.popoverController.dismiss({gameId: this.gameId});
+        }
+      )
     }
   }
 

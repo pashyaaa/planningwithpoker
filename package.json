@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "npm run build && PS Remove-Item -Path public -Recurse && copy-item .\\www -destination .\\public -Recurse && firebase deploy"
   },
   "private": true,
   "dependencies": {

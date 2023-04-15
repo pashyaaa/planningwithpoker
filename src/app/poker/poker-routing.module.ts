@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PokerPage } from './poker.page';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/poker', pathMatch: 'full' },
   {
     path: 'poker',
     component: PokerPage,
