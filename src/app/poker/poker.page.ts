@@ -23,8 +23,7 @@ export class PokerPage implements OnInit, OnDestroy {
   votes = [];
   curVote = -99;
   numberSeries = [[1,2,3,4,5],[0,1,2,3,5,8,13]];
-  //selectedNumberSeries = [0,1,2,3,5,8,13];
-  selectedNumberSeries = [1,2,3,4,5];
+  selectedNumberSeries;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,6 +53,7 @@ export class PokerPage implements OnInit, OnDestroy {
         this.dataService.getGame(this.gameId), 
         async (snapshot) => {
           this.game = snapshot.data();
+          this.selectedNumberSeries = this.game.numberSeries;
           console.log(this.game)
           console.log(this.game.cur_round)
           if(this.game.cur_round == undefined || this.game.cur_round == '')
@@ -186,6 +186,7 @@ export class PokerPage implements OnInit, OnDestroy {
   async createGame(){
     const popover = await this.popoverController.create({
       component: CreateGameComponent,
+      size: 'auto',
       backdropDismiss: false,
       componentProps: {
         popoverController: this.popoverController,
@@ -196,6 +197,7 @@ export class PokerPage implements OnInit, OnDestroy {
     popover.onDidDismiss().then(
       async res=>{
         this.gameId = res.data.gameId;
+        this.selectedNumberSeries = res.data.selectedNumberSeries;
         this.router.navigate(['poker/'+this.gameId])
       }
     )

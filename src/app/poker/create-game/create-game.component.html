@@ -1,6 +1,9 @@
 <ion-card>
-  <ion-card-header>
+  <ion-card-header *ngIf="action==0">
     Create Game
+  </ion-card-header>
+  <ion-card-header *ngIf="action==1">
+    Edit Game
   </ion-card-header>
   <ion-card-content>
     <form [formGroup]="form" (submit)="save()">
@@ -8,10 +11,13 @@
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text" formControlName="name" required></ion-input>
       </ion-item>
-      <!-- <ion-select>
-        <ion-select-option *ngFor="let num of numberSeries; index as i" value="i">{{num}}</ion-select-option>
-      </ion-select> -->
-      <ion-button shape="round" expand="block" type="submit" [disabled]="saveClicked">Save</ion-button>
+      <ion-item *ngIf="action==0">
+        <ion-label>Number Series</ion-label>
+        <ion-select formControlName="numberSeries" required>
+          <ion-select-option *ngFor="let num of numberSeries; index as i" [value]="i">{{num}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button shape="round" expand="block" type="submit" [disabled]="saveClicked || !form.valid" style="margin-top: 20px;">Save</ion-button>
     </form>
   </ion-card-content>
 </ion-card>

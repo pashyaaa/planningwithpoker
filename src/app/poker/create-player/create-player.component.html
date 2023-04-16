@@ -1,6 +1,9 @@
 <ion-card>
-  <ion-card-header>
+  <ion-card-header *ngIf="action==0">
     Create Player
+  </ion-card-header>
+  <ion-card-header *ngIf="action==1">
+    Edit Player
   </ion-card-header>
   <ion-card-content>
     <form [formGroup]="form" (submit)="save()">
@@ -8,7 +11,7 @@
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text" formControlName="name" required></ion-input>
       </ion-item>
-      <ion-button shape="round" expand="block" type="submit" [disabled]="saveClicked">Save</ion-button>
+      <ion-button shape="round" expand="block" type="submit" [disabled]="saveClicked || !form.valid">Save</ion-button>
     </form>
   </ion-card-content>
 </ion-card>
