@@ -20,12 +20,12 @@
   <ion-button class='center' *ngIf="curRound && !curRound.isReveled && votes?.length > 0" (click)="reveal()">Reveal</ion-button>
   <ion-button class='center1' *ngIf="curRound && curRound.isReveled && votes?.length > 0" (click)="reset()">Reset</ion-button>
   <div *ngFor="let player of players; index as i" [ngClass]="['player-box','player'+(i+1)]">
-    <div class='player' [style.background-color]="playerColor(player)">
+    <!-- <div class='player' [style.background-color]="playerColor(player)">
       <div class="vote" *ngIf="curRound && curRound.isReveled">{{getVote(player?.id)}}</div>
-    </div>
-    <!-- <ion-avatar [style.color]="playerColor(player)" >
+    </div> -->
+    <ion-avatar style="border: 5px solid white !important;" [style.border-color]="playerColor(player)">
       <img alt="{{player?.name}}" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar> -->
+    </ion-avatar>
     <div class='player-name'>{{player?.name}}</div>
   </div>
 
