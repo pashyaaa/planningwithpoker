@@ -7,6 +7,27 @@
   </ion-card-header>
   <ion-card-content>
     <form [formGroup]="form" (submit)="save()">
+      <div padding align="center">
+        <ion-avatar>
+          <img [src]="profilePic">
+          <ion-fab vertical="start" horizontal="center" >
+            <ion-fab-button size="small">
+              <ion-icon name="image"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="start" (click)="selectPicture()">
+              <ion-fab-button size="small" color="primary">
+                <ion-icon name="folder"></ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+            <ion-fab-list side="end" (click)="removePicture()">
+              <ion-fab-button size="small" color="danger">
+                <ion-icon name="trash"></ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+        </ion-avatar>
+      </div>
+
       <ion-item lines="full">
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text" formControlName="name" required></ion-input>

@@ -4,7 +4,7 @@
     <ion-title slot="start" (click)="editGame()">{{game?.name}}</ion-title>
     <ion-chip slot="end" (click)="editPlayer(this.playerId)">
       <ion-avatar>
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        <img alt="Silhouette of a person's head" src="{{playerProfilePic}}" />
       </ion-avatar>
       <ion-label>
         {{player?.name}}
@@ -24,7 +24,7 @@
       <div class="vote" *ngIf="curRound && curRound.isReveled">{{getVote(player?.id)}}</div>
     </div> -->
     <ion-avatar style="border: 5px solid white !important;" [style.border-color]="playerColor(player)">
-      <img alt="{{player?.name}}" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <img alt="{{player?.name}}" src="{{player?.profilePic}}" />
     </ion-avatar>
     <div class='player-name'>{{player?.name}}</div>
   </div>

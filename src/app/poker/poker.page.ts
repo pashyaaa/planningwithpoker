@@ -24,6 +24,7 @@ export class PokerPage implements OnInit, OnDestroy {
   curVote = -99;
   numberSeries = [[1,2,3,4,5],[0,1,2,3,5,8,13]];
   selectedNumberSeries;
+  playerProfilePic;
 
   constructor(
     private route: ActivatedRoute,
@@ -86,6 +87,7 @@ export class PokerPage implements OnInit, OnDestroy {
       }else
       {
         this.player = (await this.dataService.getPlayer(this.gameId, this.playerId)).data();
+        this.playerProfilePic = this.player.profilePic;
         console.log(this.player)
         if(this.player == undefined){
           this.createPlayer(this.gameId);
@@ -153,6 +155,7 @@ export class PokerPage implements OnInit, OnDestroy {
         this.playerId = res.data.playerId;
         console.log(this.playerId)
         this.player = (await this.dataService.getPlayer(this.gameId, this.playerId)).data();
+        this.playerProfilePic = this.player.profilePic;
         console.log(this.player)
         this.selectedVote(this.playerId);
       }
@@ -168,6 +171,7 @@ export class PokerPage implements OnInit, OnDestroy {
         gameId: this.gameId,
         playerId: playerId,
         playerName: this.player.name,
+        playerProfilePic: this.player.profilePic,
         action: 1
       },
       translucent: true,
@@ -177,6 +181,7 @@ export class PokerPage implements OnInit, OnDestroy {
         this.playerId = res.data.playerId;
         console.log(this.playerId)
         this.player = (await this.dataService.getPlayer(this.gameId, this.playerId)).data();
+        this.playerProfilePic = this.player.profilePic;
         console.log(this.player)
       }
     )
