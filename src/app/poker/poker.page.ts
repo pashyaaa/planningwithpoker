@@ -102,6 +102,10 @@ export class PokerPage implements OnInit, OnDestroy {
             const player = doc.data();
             player.id = doc.id;
             console.log(player)
+            if(player.profilePic == undefined)
+            {
+              player.profilePic = "https://ionicframework.com/docs/img/demos/avatar.svg"
+            }
             this.players.push(player);
           });
         },

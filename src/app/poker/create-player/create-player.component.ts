@@ -79,8 +79,8 @@ export class CreatePlayerComponent implements OnInit {
           console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
           // after here 'file' can be accessed and used for further process
           // Abort uploading if file size is greater than 50KB
-          if (this.imageCompress.byteCount(result) > 51200) {
-            window.alert("Image size is greate than 50KB. Please select smaller image.");
+          if (this.imageCompress.byteCount(result) > 512000) {
+            window.alert("Image size is greate than 5MB. Please select smaller image.");
             return
           }
           this.profilePic = result;
