@@ -24,7 +24,7 @@ export class PokerPage implements OnInit, OnDestroy {
   curVote = -99;
   numberSeries = [[1,2,3,4,5],[0,1,2,3,5,8,13]];
   selectedNumberSeries;
-  playerProfilePic;
+  playerProfilePic = "https://ionicframework.com/docs/img/demos/avatar.svg";
 
   constructor(
     private route: ActivatedRoute,
@@ -87,7 +87,13 @@ export class PokerPage implements OnInit, OnDestroy {
       }else
       {
         this.player = (await this.dataService.getPlayer(this.gameId, this.playerId)).data();
-        this.playerProfilePic = this.player.profilePic;
+        if(this.player.profilePic)
+        {
+          this.playerProfilePic = this.player.profilePic;
+        }
+        else{
+          this.playerProfilePic = "https://ionicframework.com/docs/img/demos/avatar.svg";
+        }
         console.log(this.player)
         if(this.player == undefined){
           this.createPlayer(this.gameId);
