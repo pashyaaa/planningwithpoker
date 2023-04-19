@@ -245,6 +245,7 @@ export class PokerPage implements OnInit, OnDestroy {
     if(this.curRound && !this.curRound.isReveled){
       this.curVote = vote;
       this.dataService.addVote(this.gameId, this.curRound.id, this.playerId, vote);
+      this.playAudio();
     }
   }
 
@@ -305,5 +306,12 @@ export class PokerPage implements OnInit, OnDestroy {
     let filteredVotes = this.votes.filter(res=>{return res.vote==vote});
     console.log(filteredVotes)
     return filteredVotes;
+  }
+
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../../assets/audio/tap.mp3";
+    audio.load();
+    audio.play();
   }
 }
