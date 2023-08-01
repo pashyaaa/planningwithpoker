@@ -25,6 +25,8 @@ export class PokerPage implements OnInit, OnDestroy {
   numberSeries = [[1,2,3,4,5],[0,1,2,3,5,8,13]];
   selectedNumberSeries;
   playerProfilePic = "https://ionicframework.com/docs/img/demos/avatar.svg";
+  isDescriptionInEdit: boolean = false;
+  description: String = "Multi-line story/defect description.";
 
   constructor(
     private route: ActivatedRoute,
@@ -32,8 +34,8 @@ export class PokerPage implements OnInit, OnDestroy {
     private popoverController: PopoverController,
     private firestore:Firestore,
     private router: Router
-  ) 
-  { 
+  )
+  {
 
   }
 
@@ -51,7 +53,7 @@ export class PokerPage implements OnInit, OnDestroy {
     else
     {
       const getGame = onSnapshot(
-        this.dataService.getGame(this.gameId), 
+        this.dataService.getGame(this.gameId),
         async (snapshot) => {
           this.game = snapshot.data();
           this.selectedNumberSeries = this.game.numberSeries;
@@ -73,13 +75,13 @@ export class PokerPage implements OnInit, OnDestroy {
             this.curRound.id = this.game.cur_round;
             this.getRound()
           }
-  
+
           console.log(this.curRound.id)
         },
         (error) => {
           // ...
         });
-  
+
       this.playerId = localStorage.getItem(this.gameId);
       if(this.playerId == null)
       {
@@ -99,9 +101,9 @@ export class PokerPage implements OnInit, OnDestroy {
           this.createPlayer(this.gameId);
         }
       }
-  
+
       const getPlayers = onSnapshot(
-        this.dataService.getPlayers(this.gameId), 
+        this.dataService.getPlayers(this.gameId),
         (snapshot) => {
           this.players = [];
           snapshot.forEach((doc) => {
@@ -125,14 +127,14 @@ export class PokerPage implements OnInit, OnDestroy {
   {
     //Get Round and votes
     const getRound = onSnapshot(
-      this.dataService.getRound(this.gameId, this.curRound.id), 
+      this.dataService.getRound(this.gameId, this.curRound.id),
       async (snapshot) => {
         this.curRound = snapshot.data();
         this.curRound.id = snapshot.id;
         console.log(this.curRound)
 
         const getVotes = onSnapshot(
-          this.dataService.getVotes(this.gameId, this.curRound.id), 
+          this.dataService.getVotes(this.gameId, this.curRound.id),
           (snapshot) => {
             this.votes = [];
             snapshot.forEach((doc) => {
@@ -243,6 +245,8 @@ export class PokerPage implements OnInit, OnDestroy {
   }
 
   reset(){
+    this.description = "Multi-line story/defect description."
+    this.isDescriptionInEdit = false;
     this.curVote = -99;
     this.dataService.addRound(this.gameId).then(
       async res => {
