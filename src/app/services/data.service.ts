@@ -80,9 +80,16 @@ export class DataService {
     });
   }
 
+  async addDescription(gameId:any, roundId:any, description:any){
+    return setDoc(doc(this.firestore, 'games/'+ gameId + '/rounds/' + roundId), {
+      description : description
+    });
+  }
+
   addRound(gameId:any){
     return addDoc(collection(this.firestore, 'games/'+ gameId + '/rounds'),{
-      isReveled : false
+      isReveled : false,
+      description : ""
     })
   }
 

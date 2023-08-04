@@ -15,11 +15,8 @@
 
 <ion-content>
   <ion-item lines="none">
-    <ion-icon name="document-text-outline"></ion-icon>
-    <ion-label *ngIf="!isDescriptionInEdit" (click)="isDescriptionInEdit = true">
-      {{description}}
-    </ion-label>
-    <ion-input *ngIf="isDescriptionInEdit">
+    <ion-input [clearOnEdit]="true" placeholder="Multi-line story/defect description." [value]="description" (ionBlur)="saveDescription()">
+      <ion-icon name="document-text-outline"></ion-icon>
     </ion-input>
   </ion-item>
   <div class='table'></div>

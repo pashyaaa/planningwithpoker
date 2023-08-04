@@ -25,8 +25,7 @@ export class PokerPage implements OnInit, OnDestroy {
   numberSeries = [[1,2,3,4,5],[0,1,2,3,5,8,13]];
   selectedNumberSeries;
   playerProfilePic = "https://ionicframework.com/docs/img/demos/avatar.svg";
-  isDescriptionInEdit: boolean = false;
-  description: String = "Multi-line story/defect description.";
+  description: String = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -131,7 +130,9 @@ export class PokerPage implements OnInit, OnDestroy {
       async (snapshot) => {
         this.curRound = snapshot.data();
         this.curRound.id = snapshot.id;
+        this.description = this.curRound.description;
         console.log(this.curRound)
+        console.log(this.description)
 
         const getVotes = onSnapshot(
           this.dataService.getVotes(this.gameId, this.curRound.id),
@@ -245,8 +246,7 @@ export class PokerPage implements OnInit, OnDestroy {
   }
 
   reset(){
-    this.description = "Multi-line story/defect description."
-    this.isDescriptionInEdit = false;
+    this.description = ""
     this.curVote = -99;
     this.dataService.addRound(this.gameId).then(
       async res => {
@@ -266,6 +266,20 @@ export class PokerPage implements OnInit, OnDestroy {
       this.dataService.addVote(this.gameId, this.curRound.id, this.playerId, vote);
       this.playAudio();
     }
+  }
+
+  saveDescription()
+  {
+    if(this.description == undefined)
+    {
+      this.description = "";
+    }
+    console.log(this.description)
+    this.dataService.addDescription(this.gameId, this.curRound.id, this.description).then(
+      res => {
+        console.log(res)
+      }
+    )
   }
 
   playerColor(player:any){
