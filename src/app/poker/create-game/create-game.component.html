@@ -1,10 +1,12 @@
 <ion-card>
-  <ion-card-header *ngIf="action==0">
+  <ion-card-header *ngIf="action == 0" class="centered-title">
     Create Game
   </ion-card-header>
-  <ion-card-header *ngIf="action==1">
+
+  <ion-card-header *ngIf="action==1" class="centered-title">
     Edit Game
   </ion-card-header>
+
   <ion-card-content>
     <form [formGroup]="form" (submit)="save()">
       <ion-item lines="full">
@@ -12,10 +14,14 @@
         <ion-input type="text" formControlName="name" required></ion-input>
       </ion-item>
       <ion-item *ngIf="action==0">
-        <ion-label>Number Series</ion-label>
-        <ion-select formControlName="numberSeries" required>
+        <ion-label position="floating">Number Series</ion-label>
+        <ion-select formControlName="numberSeries">
           <ion-select-option *ngFor="let num of numberSeries; index as i" [value]="i">{{num}}</ion-select-option>
+          <ion-select-option [value]="'Custom'">Custom Series</ion-select-option>
         </ion-select>
+      </ion-item>
+      <ion-item *ngIf="form.get('numberSeries').value==='Custom'">
+        <ion-input formControlName="customSeries" label="Custom Series" placeholder="E.g. 0,1,2,3" ></ion-input>
       </ion-item>
       <ion-button shape="round" expand="block" type="submit" [disabled]="saveClicked || !form.valid" style="margin-top: 20px;">Save</ion-button>
     </form>

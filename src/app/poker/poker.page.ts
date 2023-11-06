@@ -204,7 +204,7 @@ export class PokerPage implements OnInit, OnDestroy {
   async createGame(){
     const popover = await this.popoverController.create({
       component: CreateGameComponent,
-      size: 'auto',
+      size: 'cover',
       backdropDismiss: false,
       componentProps: {
         popoverController: this.popoverController,
