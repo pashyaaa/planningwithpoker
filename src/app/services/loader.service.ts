@@ -9,11 +9,9 @@ export class LoaderService {
   isLoading = false;
   loader: any;
 
-  constructor(private loadingController:LoadingController) {
+  constructor(private loadingController: LoadingController) {}
 
-   }
-
-   showLoader() {
+  showLoader() {
     this.isLoading = true;
     this.loadingController.create({
       message: 'Processing Server Request'
@@ -28,9 +26,9 @@ export class LoaderService {
   }
 
   async hideLoader() {
-    console.log("hideLoader called")
+    console.log('hideLoader called');
     this.isLoading = false;
-    if(this.loader != null){
+    if (this.loader != null) {
       return await this.loader.dismiss().then(() => console.log('dismissed'));
     }
   }
