@@ -208,7 +208,7 @@ export class PokerPage implements OnInit, OnDestroy {
       backdropDismiss: false,
       componentProps: {
         popoverController: this.popoverController,
-        action: 0
+        action: 'createGame'
       },
       translucent: true,
     });
@@ -230,7 +230,7 @@ export class PokerPage implements OnInit, OnDestroy {
         popoverController: this.popoverController,
         gameId: this.gameId,
         gameName: this.game.name,
-        action: 1
+        action: 'editGame'
       },
       translucent: true,
     });

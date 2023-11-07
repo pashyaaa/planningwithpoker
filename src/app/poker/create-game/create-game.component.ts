@@ -18,7 +18,7 @@ export class CreateGameComponent implements OnInit {
 
   form: FormGroup;
   saveClicked = false;
-  numberSeries = [[0,1,2,3,5,8,13],[1,2,3,4,5]];
+  numberSeries = [[0, 1, 2, 3, 5, 8, 13], [1, 2, 3, 4, 5]];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,12 +35,7 @@ export class CreateGameComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.action === 1) {
-      this.form = this.formBuilder.group({
-        name: ['', [Validators.required]],
-      });
-      this.form.get('name').setValue(this.gameName);
-    } else {
+    {
       this.form = this.formBuilder.group({
         name: ['', [Validators.required]],
         numberSeries: ['', [Validators.required]],
@@ -73,36 +68,38 @@ export class CreateGameComponent implements OnInit {
     return resultArray;
   }
 
-  save(){
+  save() {
     this.saveClicked = true;
-    console.log(this.form.get('name').value)
-    if(this.action == 0) {
-      let tempNumberSeries;
-      if(this.form.get('numberSeries').value==='Custom'){
-        tempNumberSeries=this.convertStringToArray(this.form.get('customSeries').value);
-        this.numberSeries.push(tempNumberSeries);
-      }
-      else{
-        tempNumberSeries = this.numberSeries[this.form.get('numberSeries').value];
-      }
-      const game = {
-        name: this.form.get('name').value,
-        numberSeries: tempNumberSeries
-      };
+    console.log(this.form.get('name').value);
+
+    let tempNumberSeries;
+    if (this.form.get('numberSeries').value === 'Custom') {
+      tempNumberSeries = this.convertStringToArray(this.form.get('customSeries').value);
+      this.numberSeries.push(tempNumberSeries);
+    }
+    else {
+      tempNumberSeries = this.numberSeries[this.form.get('numberSeries').value];
+    }
+    const game = {
+      name: this.form.get('name').value,
+      numberSeries: tempNumberSeries
+    };
+
+    if (this.action === 'createGame') {
       const gamesRef = collection(this.firestore, 'games');
 
       addDoc(gamesRef, game).then(
-        (game)=>{
+        (game) => {
           this.saveClicked = false;
-          this.popoverController.dismiss({gameId: game.id, selectedNumberSeries: this.numberSeries[this.form.get('numberSeries').value]});
+          this.popoverController.dismiss({ gameId: game.id, selectedNumberSeries: this.numberSeries[this.form.get('numberSeries').value] });
         }
       )
-    }else{
-      const gamesRef = doc(this.firestore, 'games/'+this.gameId);
-      updateDoc(gamesRef, {name:this.form.get('name').value}).then(
-        (player)=>{
+    } else {
+      const gamesRef = doc(this.firestore, 'games/' + this.gameId);
+      updateDoc(gamesRef, game).then(
+        (player) => {
           this.saveClicked = false;
-          this.popoverController.dismiss({gameId: this.gameId});
+          this.popoverController.dismiss({ gameId: this.gameId });
         }
       )
     }
