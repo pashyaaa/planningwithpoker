@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { addDoc, collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PopoverController } from '@ionic/angular';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-create-game',
@@ -24,31 +25,72 @@ export class CreateGameComponent implements OnInit {
     private firestore: Firestore,
   ) { }
 
+  customSeriesValidator(required: boolean): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (required && (control.value === null || control.value === '')) {
+        return { required: true };
+      }
+      return null;
+    };
+  }
+
   ngOnInit() {
-    if(this.action == 1){
+    if (this.action === 1) {
       this.form = this.formBuilder.group({
         name: ['', [Validators.required]],
       });
-      this.form.setValue({name : this.gameName})
-    }else
-    {
+      this.form.get('name').setValue(this.gameName);
+    } else {
       this.form = this.formBuilder.group({
         name: ['', [Validators.required]],
         numberSeries: ['', [Validators.required]],
+        customSeries: ['', []], // No required validator initially
+      });
+
+      // Add a custom validator to 'customSeries' based on 'numberSeries' value
+      this.form.get('numberSeries').valueChanges.subscribe((value) => {
+        if (value === 'Custom') {
+          this.form.get('customSeries').setValidators([this.customSeriesValidator(true)]);
+        } else {
+          this.form.get('customSeries').setValidators([]);
+        }
+        this.form.get('customSeries').updateValueAndValidity();
       });
     }
   }
 
-   save(){
+  convertStringToArray(inputString: string): (number | string)[] {
+    const inputArray = inputString.split(',');
+    const resultArray: (number | string)[] = [];
+    for (const item of inputArray) {
+      const numberValue = parseFloat(item);
+      if (!isNaN(numberValue)) {
+        resultArray.push(numberValue);
+      } else {
+        resultArray.push(item);
+      }
+    }
+    return resultArray;
+  }
+
+  save(){
     this.saveClicked = true;
     console.log(this.form.get('name').value)
     if(this.action == 0) {
+      let tempNumberSeries;
+      if(this.form.get('numberSeries').value==='Custom'){
+        tempNumberSeries=this.convertStringToArray(this.form.get('customSeries').value);
+        this.numberSeries.push(tempNumberSeries);
+      }
+      else{
+        tempNumberSeries = this.numberSeries[this.form.get('numberSeries').value];
+      }
       const game = {
         name: this.form.get('name').value,
-        numberSeries: this.numberSeries[this.form.get('numberSeries').value]
+        numberSeries: tempNumberSeries
       };
       const gamesRef = collection(this.firestore, 'games');
-      
+
       addDoc(gamesRef, game).then(
         (game)=>{
           this.saveClicked = false;
@@ -67,3 +109,5 @@ export class CreateGameComponent implements OnInit {
   }
 
 }
+
+
