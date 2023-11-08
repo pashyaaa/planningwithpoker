@@ -57,8 +57,8 @@ export class PokerPage implements OnInit, OnDestroy {
           this.game = snapshot.data();
           this.selectedNumberSeries = this.game.numberSeries;
           console.log(this.game)
-          console.log(this.game.cur_round)
-          if(this.game.cur_round == undefined || this.game.cur_round == '')
+          console.log(this.game.currentRound)
+          if(this.game.currentRound == undefined || this.game.currentRound == '')
           {
             await this.dataService.addRound(this.gameId).then(
               async res => {
@@ -71,7 +71,7 @@ export class PokerPage implements OnInit, OnDestroy {
           }
           else
           {
-            this.curRound.id = this.game.cur_round;
+            this.curRound.id = this.game.currentRound;
             this.getRound()
           }
 
@@ -208,7 +208,7 @@ export class PokerPage implements OnInit, OnDestroy {
       backdropDismiss: false,
       componentProps: {
         popoverController: this.popoverController,
-        action: 0
+        action: 'createGame'
       },
       translucent: true,
     });
@@ -230,7 +230,7 @@ export class PokerPage implements OnInit, OnDestroy {
         popoverController: this.popoverController,
         gameId: this.gameId,
         gameName: this.game.name,
-        action: 1
+        action: 'editGame'
       },
       translucent: true,
     });
