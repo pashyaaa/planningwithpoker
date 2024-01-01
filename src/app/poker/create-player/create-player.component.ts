@@ -25,11 +25,11 @@ export class CreatePlayerComponent implements OnInit {
   profilePic = "https://ionicframework.com/docs/img/demos/avatar.svg"
   public webcamImage: WebcamImage = null;
   player:any = {};
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private firestore: Firestore,
-    private imageCompress: NgxImageCompressService, 
+    private imageCompress: NgxImageCompressService,
   ) { }
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class CreatePlayerComponent implements OnInit {
       )
     }else{
       const playerRef = doc(this.firestore, 'games/'+this.gameId+'/players/' + this.playerId );
-      updateDoc(playerRef, {name:this.form.get('name').value, profilePic:this.player.profilePic}).then(
+      updateDoc(playerRef, {name:this.form.get('name').value, profilePic:this.profilePic}).then(
         (player)=>{
           this.saveClicked = false;
           this.popoverController.dismiss({playerId: this.playerId});
