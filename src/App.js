@@ -1,5 +1,12 @@
+import { Container } from '@mui/material';
+import Header from './components/Header';
+
 const App = () => {
-    return <div>Planning With Poker</div>;
+    return (
+        <Container>
+            <Header></Header>
+        </Container>
+    );
 };
 
 export default App;
