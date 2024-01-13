@@ -5,9 +5,10 @@ import { PokerPage } from './poker.page';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: PokerPage,
   },
-  { path: 'poker/:game_id', component: PokerPage }
+  { path: ':game_id', component: PokerPage }
 ];
 
 @NgModule({
