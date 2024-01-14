@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@3
+      - uses: actions/setup-node@2
       - run: node initenv.js
         env:
           FIREBASE_DETAILS: '${{ secrets.FIREBASEPROD }}'
