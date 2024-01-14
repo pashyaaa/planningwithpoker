@@ -3,14 +3,11 @@
     flex-direction: column;
     position: fixed;
     bottom: 20px; 
-    width: 60%;
+    width: 80%;
     align-items: center; 
     color: #3880ff;
     border-radius: 15px;
     padding: 20px;
-}
-
-.get-started:hover{
     background-color: var(--ion-color-dark);
     opacity: 80%;
 }
