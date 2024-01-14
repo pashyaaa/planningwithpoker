@@ -1,10 +1,9 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { addDoc, collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { WebcamImage } from 'ngx-webcam';
-import { WebcamModalComponent } from 'src/app/camera/webcam-modal/webcam-modal.component';
 
 @Component({
   selector: 'app-create-player',
