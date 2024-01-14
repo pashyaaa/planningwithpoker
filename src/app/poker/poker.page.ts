@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { DataService } from '../services/data.service';
 import { CreatePlayerComponent } from './create-player/create-player.component';
-import { collectionData, Firestore, doc, setDoc, deleteDoc, getDoc, onSnapshot } from '@angular/fire/firestore';
-import { collection } from '@firebase/firestore';
+import { onSnapshot } from '@angular/fire/firestore';
 import { CreateGameComponent } from './create-game/create-game.component';
 import { PlatformLocation } from '@angular/common';
 
@@ -32,7 +31,6 @@ export class PokerPage implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private dataService:DataService,
     private popoverController: PopoverController,
-    private firestore:Firestore,
     private router: Router,
     private platformLocation: PlatformLocation
   )
