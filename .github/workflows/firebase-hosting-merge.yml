@@ -12,9 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v4
-      - run: node initenv.js
+      - name: Create Environment File
         env:
-          FIREBASE_DETAILS: '${{ secrets.FIREBASEPROD }}'
+          FIREBASE_DETAILS: ${{ secrets.FIREBASE_DETAILS }}
+        run: |
+          echo "$FIREBASE_DETAILS" > src/environment.ts
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
