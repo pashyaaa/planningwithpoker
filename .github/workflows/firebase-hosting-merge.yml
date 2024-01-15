@@ -16,7 +16,7 @@ jobs:
         env:
           FIREBASE_DETAILS: ${{ secrets.FIREBASEPROD }}
         run: |
-          echo ${FIREBASE_DETAILS}
+          echo $FIREBASE_DETAILS
           node initenv.js
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
