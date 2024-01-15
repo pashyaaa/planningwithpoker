@@ -16,6 +16,7 @@ jobs:
         env:
           FIREBASE_DETAILS: ${{ secrets.FIREBASE_DETAILS }}
         run: |
+          mkdir src/environments
           echo "$FIREBASE_DETAILS" > src/environments/environment.ts
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
