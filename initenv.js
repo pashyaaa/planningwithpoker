@@ -5,7 +5,8 @@ const dir = "src/environments";
 const file = "environment.ts";
 const prodFile = "environment.prod.ts"; // For production deployment
 
-const content = `${process.env.FIRBASEPROD}`;
+const content = '${process.env.FIRBASEPROD}';
+console.log("Content" + content);
 
 fs.access(dir, fs.constants.F_OK, (err) => {
     if (err) {
