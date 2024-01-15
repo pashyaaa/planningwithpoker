@@ -14,9 +14,9 @@ jobs:
       - uses: actions/setup-node@v4
       - name: Create Environment File
         env:
-          FIREBASE_DETAILS: ${{ secrets.FIREBASEPROD }}
+          FIREBASE_DETAILS: ${{ secrets.FIREBASE_DETAILS }}
         run: |
-          echo $FIREBASE_DETAILS
+          echo $FIREBASE_DETAILS > src/environment.ts
           node initenv.js
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
