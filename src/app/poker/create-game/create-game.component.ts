@@ -32,15 +32,22 @@ export class CreateGameComponent implements OnInit {
         customSeries: ['', []], // No required validator initially
       });
 
-      // Add a custom validator to 'customSeries' based on 'numberSeries' value
-      this.gameForm.get('numberSeries').valueChanges.subscribe((value) => {
-        if (value === 'Custom') {
-          this.gameForm.get('customSeries').setValidators([Validators.required]);
-        } else {
-          this.gameForm.get('customSeries').setValidators([]);
-        }
-        this.gameForm.get('customSeries').updateValueAndValidity();
-      });
+      if(this.action == 1){
+        this.gameForm.setValue({name: this.gameName, numberSeries: {}, customSeries: {}});
+      }
+
+      if(this.action == 0){
+        // Add a custom validator to 'customSeries' based on 'numberSeries' value
+        this.gameForm.get('numberSeries').valueChanges.subscribe((value) => {
+          if (value === 'Custom') {
+            this.gameForm.get('customSeries').setValidators([Validators.required]);
+          } else {
+            this.gameForm.get('customSeries').setValidators([]);
+          }
+          this.gameForm.get('customSeries').updateValueAndValidity();
+        });
+      }
+      
     }
   }
 
@@ -76,7 +83,7 @@ export class CreateGameComponent implements OnInit {
       numberSeries: tempNumberSeries
     };
 
-    if (this.action === 'createGame') {
+    if (this.action === 0) {
       const gamesRef = collection(this.firestore, 'games');
       addDoc(gamesRef, updateGame).then(
         (game) => {
@@ -90,12 +97,10 @@ export class CreateGameComponent implements OnInit {
     }
     else {
       const gamesRef = doc(this.firestore, 'games/' + this.gameId);
-      updateDoc(gamesRef, updateGame).then(
-        () => {
+      updateDoc(gamesRef, {name:this.gameForm.get('name').value}).then(
+        ()=>{
           this.saveClicked = false;
-          this.popoverController.dismiss({
-            gameId: this.gameId
-          });
+          this.popoverController.dismiss({ gameId: this.gameId});
         }
       );
     }
