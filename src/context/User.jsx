@@ -24,8 +24,14 @@ export const UserProvider = (props) => {
     }
   }, [])
 
+  const registerUser = (user) => {
+    const userId = firebaseService.createUser(user);
+    localStorage.setItem('userId', userId);
+    setUser({...user, id: userId});
+  }
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, registerUser }}>
       {props.children}
     </UserContext.Provider>
   );
