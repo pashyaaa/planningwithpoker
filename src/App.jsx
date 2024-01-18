@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Container } from '@mui/material';
 
 import Header from './components/Header';
-import { useUser } from './context/User';
+import { useUser } from './context/UserContext';
 import UserInput from './components/UserInput';
 
 

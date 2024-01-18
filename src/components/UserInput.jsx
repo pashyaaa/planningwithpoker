@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { AccountCircleOutlined } from '@mui/icons-material';
 
-import { useUser } from '../context/User';
+import { useUser } from '../context/UserContext';
 
 const UserInput = () => {
   const userContext = useUser();
