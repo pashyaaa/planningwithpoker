@@ -1,9 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
-import firebaseConfig from '../firebase/firebaseConfig';
 import * as firebaseService from '../firebase/frebaseService';
-
-
 
 export const UserContext = createContext(null);
 
@@ -16,18 +13,23 @@ export const UserProvider = (props) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    if (userId !== null) {
-      const user = firebaseService.getUser(userId);
-      setUser(user);
-      localStorage.setItem('userId', user.id);
+    const initializeExistingUser = async (userId) => {
+      if (userId) {
+        const user = await firebaseService.getUser(userId);
+        setUser(user);
+        localStorage.setItem('userId', user.id);
+      }
     }
+
+    const userId = localStorage.getItem('userId');
+    initializeExistingUser(userId);
+    
   }, [])
 
-  const registerUser = (user) => {
-    const userId = firebaseService.createUser(user);
-    localStorage.setItem('userId', userId);
-    setUser({...user, id: userId});
+  const registerUser = async (user) => {
+    const createdUser = await firebaseService.createUser(user);
+    localStorage.setItem('userId', createdUser.id);
+    setUser(createdUser);
   }
 
   return (

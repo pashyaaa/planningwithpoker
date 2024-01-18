@@ -37,7 +37,7 @@ export const createUser = async (user) => {
     const userRef = await addDoc(userCollection, {
       name: user.name,
     });
-    console.log('Document written with id: ', userRef.id);
+    return {...user, id: userRef.id}
   } catch (e) {
     console.error(e);
     throw new Error('Error creating user');
