@@ -1,27 +1,20 @@
-import { useEffect } from 'react';
-
 import { Container } from '@mui/material';
 
 import Header from './components/Header';
 import { useUser } from './context/UserContext';
 import UserInput from './components/UserInput';
-
+import Home from './components/Home';
 
 const App = () => {
-
   const userContext = useUser();
 
-  useEffect(() => {
-    if (userContext.user === null) {
-
-    }
-  })
-
+  
 
   return (
     <Container>
       <Header></Header>
-      { userContext.user === null ? <UserInput></UserInput> : null }
+      {userContext.user === null ? <UserInput></UserInput> : null }
+      <Home></Home>
     </Container>
   );
 };
