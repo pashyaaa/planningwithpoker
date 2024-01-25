@@ -4,7 +4,6 @@ import {
   CssBaseline,
   TextField,
   Box,
-  Typography,
   Container,
 } from '@mui/material';
 import { AccountCircleOutlined } from '@mui/icons-material';
@@ -17,14 +16,14 @@ const UserInput = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    userContext.registerUser({name: data.get('name')});
+    userContext.registerUser({ name: data.get('name') });
   };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 16,
+          marginTop: '2rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -33,9 +32,7 @@ const UserInput = () => {
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <AccountCircleOutlined />
         </Avatar>
-        {/* <Typography component="h1" variant="h5">
-          Name
-        </Typography> */}
+
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"

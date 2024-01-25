@@ -1,46 +1,28 @@
 import React from 'react';
-import { Button, Container, Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
+
+import { useUser } from '../context/UserContext';
+import CreateUser from './CreateUser';
+import CreateGame from './CreateGame';
 
 const HomePage = () => {
-
-  const container = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-  };
-
-  const handleCreateGame = () => {
-    // Add logic for creating a game
-    console.log('Creating a game...');
-  };
-
-  const handleJoinGame = () => {
-    // Add logic for joining a game
-    console.log('Joining a game...');
-  };
+  const userContext = useUser();
 
   return (
-    <Container className={container}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: '8rem',
+        flexDirection: 'column',
+      }}
+    >
       <Typography variant="h4" gutterBottom>
-        Welcome to the Game Platform
+        Welcome to Plannig Poker
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleCreateGame}
-      >
-        Create Game
-      </Button>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={handleJoinGame}
-      >
-        Join Game
-      </Button>
-    </Container>
+      {userContext.user === null ? <CreateUser></CreateUser> : null}
+      <CreateGame></CreateGame>
+    </Box>
   );
 };
 

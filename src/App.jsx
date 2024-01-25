@@ -1,20 +1,17 @@
-import { Container } from '@mui/material';
+import { Container, useMediaQuery, useTheme } from '@mui/material';
 
 import Header from './components/Header';
-import { useUser } from './context/UserContext';
-import UserInput from './components/UserInput';
 import Home from './components/Home';
 
 const App = () => {
-  const userContext = useUser();
-
-  
-
+  const theme = useTheme();
+  const isXSmall = useMediaQuery(theme.breakpoints.down('xs'));
   return (
     <Container>
       <Header></Header>
-      {userContext.user === null ? <UserInput></UserInput> : null }
-      <Home></Home>
+      <div style={{ marginTop: isXSmall ? 56 : 64 }}>
+        <Home></Home>
+      </div>
     </Container>
   );
 };
