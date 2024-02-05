@@ -13,6 +13,7 @@ const GameArea = () => {
             "left table right"
             "left bottom right"`,
         gridTemplateRows: 'auto 1fr auto',
+        gap: '1rem',
         '@media (min-width: 920px)': {
           display: 'inline-grid',
           gridTemplateColumns: '10rem 1fr 10rem',
