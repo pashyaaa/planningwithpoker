@@ -1,6 +1,8 @@
 import { Box } from '@mui/material';
 
 import PokerTable from './PokerTable';
+import PlayerArea from './PlayerArea';
+import Player from './Player';
 
 const GameArea = () => {
   return (
@@ -28,7 +30,11 @@ const GameArea = () => {
         },
       }}
     >
-        <PokerTable></PokerTable>
+      <PokerTable></PokerTable>
+      <PlayerArea gridArea='top'></PlayerArea>
+      <PlayerArea gridArea='left'></PlayerArea>
+      <PlayerArea gridArea='right'></PlayerArea>
+      <PlayerArea gridArea='bottom'></PlayerArea>
     </Box>
   );
 };

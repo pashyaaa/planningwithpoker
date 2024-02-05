@@ -12,7 +12,6 @@ const PokerTable = () => {
           minHeight: '14rem',
           padding: '0 1.6rem',
           position: 'relative',
-          width: '100%',
           '@media (min-width: 920px)': {
             minWidth: '33rem',
           },
