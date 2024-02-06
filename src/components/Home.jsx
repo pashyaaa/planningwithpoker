@@ -26,8 +26,6 @@ const HomePage = () => {
       </Typography> */}
       {userContext.user === null ? <CreateUser></CreateUser> : null}
       {/* <CreateGame></CreateGame> */}
-      <GameArea></GameArea>
-      <CardArea></CardArea>
     </Box>
   );
 };
