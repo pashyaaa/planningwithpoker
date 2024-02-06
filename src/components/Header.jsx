@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -11,6 +12,11 @@ import { useUser } from '../context/UserContext';
 
 const Header = () => {
   const userContext = useUser();
+  const navigate = useNavigate();
+
+  const createGameClick = () => {
+    navigate('/create-game');
+  };
 
   return (
     <AppBar>
@@ -18,11 +24,16 @@ const Header = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Planning With Poker
         </Typography>
-        <ButtonGroup variant="text" sx={{ marginX: 2 }}>
-          <Button color="inherit">Create Game</Button>
-          <Button color="inherit">Join Game</Button>
-        </ButtonGroup>
-        {userContext.user !== null ? <User></User> : null}
+        {userContext.user !== null ? (
+          <>
+            <ButtonGroup variant="text" sx={{ marginX: 2 }}>
+              <Button color="inherit" onClick={createGameClick}>
+                Create Game
+              </Button>
+            </ButtonGroup>
+            <User></User>
+          </>
+        ) : null}
       </Toolbar>
     </AppBar>
   );

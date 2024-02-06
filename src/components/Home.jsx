@@ -1,11 +1,8 @@
-import React from 'react';
 import { Typography, Box } from '@mui/material';
 
 import { useUser } from '../context/UserContext';
 import CreateUser from './CreateUser';
-import CreateGame from './CreateGame';
-import GameArea from './GameArea';
-import CardArea from './CardArea';
+import PokerTable from './PokerTable';
 
 const HomePage = () => {
   const userContext = useUser();
@@ -25,7 +22,7 @@ const HomePage = () => {
         Welcome to Plannig Poker
       </Typography> */}
       {userContext.user === null ? <CreateUser></CreateUser> : null}
-      {/* <CreateGame></CreateGame> */}
+      <PokerTable></PokerTable>
     </Box>
   );
 };

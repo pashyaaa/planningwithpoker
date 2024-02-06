@@ -1,7 +1,10 @@
 import { Box, Button, List, ListItem, Typography } from '@mui/material';
+import { useGame } from '../context/GameContext';
 
 const CardArea = () => {
-  const arr = [1, 2, 3, 4, 5];
+  const gameContext = useGame();
+  const cardValues = gameContext.game.cards;
+
   return (
     <Box
       sx={{
@@ -45,7 +48,7 @@ const CardArea = () => {
               paddingY: '1rem',
             }}
           >
-            {arr.map((item) => {
+            {cardValues.map((item) => {
               return (
                 <ListItem
                   key={item}

@@ -70,8 +70,8 @@ export const createGame = async (game) => {
       createdBy: game.createdBy,
       cards: game.cards,
     };
-    const gameRef = await addDoc(gamesCollection, finalGame);
-    return { id: gameRef.id, ...finalGame };
+    const gameRef = await addDoc(gamesCollection, game);
+    return { id: gameRef.id, ...game };
   } catch (e) {
     console.error(e);
     throw new Error('Error creating game in firestore');

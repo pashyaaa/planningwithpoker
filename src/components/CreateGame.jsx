@@ -10,21 +10,26 @@ import {
 import CasinoIcon from '@mui/icons-material/Casino';
 
 import { useGame } from '../context/GameContext';
-import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const CreateGame = () => {
   const gameContext = useGame();
+  const navigate = useNavigate();
 
   const exampleCardValues = ['1,2,3,4,5', '2,4,6,8,10', '1,2,3,5,8,13,21'];
 
-  const submitGame = (e) => {
+  const submitGame = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
 
-        const name= data.get('name')
-        const cards= data.get('cards')
+    const name = data.get('name');
+    const cardsInput = data.get('cards');
 
-    gameContext.createGame(name, cards);
+    const cards = cardsInput.split(',').map((num) => parseInt(num, 10));
+
+    const createdGame = await gameContext.createGame(name, cards);
+
+    navigate(`/game/${createdGame.id}`);
   };
 
   return (

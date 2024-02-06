@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 
 import PokerTable from './PokerTable';
 import PlayerArea from './PlayerArea';
-import Player from './Player';
 
 const GameArea = () => {
   return (
