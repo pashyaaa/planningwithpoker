@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-const Player = () => {
+const Player = ({id, name}) => {
   return (
     <Box
       sx={{
@@ -18,7 +18,7 @@ const Player = () => {
           flexShrink: '0',
         }}
       ></Box>
-      <Typography>Name</Typography>
+      <Typography variant='h6'>{name}</Typography>
     </Box>
   );
 };

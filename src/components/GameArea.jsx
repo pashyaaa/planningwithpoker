@@ -2,8 +2,28 @@ import { Box } from '@mui/material';
 
 import PokerTable from './PokerTable';
 import PlayerArea from './PlayerArea';
+import { useGame } from '../context/GameContext';
+import { useEffect, useState } from 'react';
 
 const GameArea = () => {
+
+  const gameContext = useGame();
+  const [players, setPlayers] = useState([]);
+  const [firstBlock, setFirstBlock] = useState([]);
+  const [secondBlock, setSecondBlock] = useState([]);
+  const [thirdBlock, setThirdBlock] = useState([]);
+  const [fourthBlock, setFourthBlock] = useState([]);
+
+  useEffect(() => {
+    setPlayers(gameContext.getPlayers());
+    const playersPerBlock = Math.ceil(players.length/4);
+    setFirstBlock(players.slice(0, playersPerBlock));
+    setSecondBlock(players.slice(playersPerBlock, playersPerBlock*2));
+    setThirdBlock(players.slice(playersPerBlock*2, playersPerBlock*3));
+    setFourthBlock(players.slice(playersPerBlock*3, playersPerBlock*4));
+  }, [gameContext.game, players ])
+
+
   return (
     <Box
       sx={{
@@ -30,10 +50,10 @@ const GameArea = () => {
       }}
     >
       <PokerTable></PokerTable>
-      <PlayerArea gridArea='top'></PlayerArea>
-      <PlayerArea gridArea='left'></PlayerArea>
-      <PlayerArea gridArea='right'></PlayerArea>
-      <PlayerArea gridArea='bottom'></PlayerArea>
+      <PlayerArea gridArea='bottom' players={firstBlock}></PlayerArea>
+      <PlayerArea gridArea='top' players={secondBlock}></PlayerArea>
+      <PlayerArea gridArea='left' players={thirdBlock}></PlayerArea>
+      <PlayerArea gridArea='right' players={fourthBlock}></PlayerArea>
     </Box>
   );
 };

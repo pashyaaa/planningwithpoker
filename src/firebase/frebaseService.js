@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getFirestore,
+  updateDoc,
 } from 'firebase/firestore';
 
 import firebaseConfig from './firebaseConfig';
@@ -12,6 +13,7 @@ import firebaseConfig from './firebaseConfig';
 initializeApp(firebaseConfig);
 
 const db = getFirestore();
+
 const usersCollection = collection(db, 'users');
 const gamesCollection = collection(db, 'games');
 
@@ -65,11 +67,6 @@ export const createGame = async (game) => {
   }
 
   try {
-    const finalGame = {
-      name: game.name,
-      createdBy: game.createdBy,
-      cards: game.cards,
-    };
     const gameRef = await addDoc(gamesCollection, game);
     return { id: gameRef.id, ...game };
   } catch (e) {
@@ -93,5 +90,26 @@ export const getGame = async (gameId) => {
   } catch (e) {
     console.error(e);
     throw new Error('Error fetching game from firestore');
+  }
+};
+
+export const addPlayerToGame = async (gameId, playerId, playerName) => {
+  if (!gameId || !playerId || !playerName) {
+    throw new Error('Invalid game id');
+  }
+
+  try {
+    const gameRef = doc(db, 'games', gameId);
+    const gameDoc = (await getDoc(gameRef)).data();
+
+    gameDoc.players = gameDoc.players ? gameDoc.players : [] 
+    const currentPlayer = gameDoc.players.find((player) => player.id === playerId);
+    if (currentPlayer === undefined) {
+      const newPlayers = [...gameDoc.players, { id: playerId, name: playerName }];
+      await updateDoc(gameRef, { players: newPlayers });
+    }
+
+  } catch (e) {
+    throw new Error(`Failed to update game with the current players: ${gameId}`);
   }
 };

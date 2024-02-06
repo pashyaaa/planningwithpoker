@@ -1,25 +1,30 @@
-import { Box } from "@mui/material";
+import { Box } from '@mui/material';
 
-import Player from "./Player";
+import Player from './Player';
 
-const PlayerArea = (props) => {
+const PlayerArea = ({ gridArea, players }) => {
+  console.log(gridArea, players);
   return (
-<Box
+    <Box
       sx={{
         display: 'flex',
         alignItems: 'center',
         borderRadius: '2.8rem',
         outlineColor: '#74b3ff',
         position: 'relative',
-        flexDirection: props.gridArea === 'top' || props.gridArea === 'bottom' ? 'row' : 'column',
+        flexDirection:
+          gridArea === 'top' || gridArea === 'bottom' ? 'row' : 'column',
         justifyContent: 'space-around',
-        gridArea: props.gridArea,
+        gridArea: gridArea,
       }}
-        >
-            <Player></Player>
-            <Player></Player>
+    >
+      {players.map((player) => {
+        return (
+          <Player key={player.id} id={player.id} name={player.name}></Player>
+        );
+      })}
     </Box>
-  )
+  );
 };
 
 export default PlayerArea;

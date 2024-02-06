@@ -36,8 +36,8 @@ export const GameProvider = (props) => {
     return createdGame;
   };
 
-  const getPlayers = async () => {
-    return game.players;
+  const getPlayers = () => {
+    return game.players ? game.players : [];
   };
 
   const addPlayer = async (playerId, playerName) => {
@@ -46,7 +46,7 @@ export const GameProvider = (props) => {
 
   return (
     <GameContext.Provider
-      value={{ game, createGame, initializeGame, addPlayer }}
+      value={{ game, createGame, initializeGame, addPlayer, getPlayers }}
     >
       {props.children}
     </GameContext.Provider>
