@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 import * as firebaseService from '../firebase/frebaseService';
 import { useUser } from './UserContext';
@@ -16,23 +16,19 @@ export const GameProvider = (props) => {
 
   const initializeGame = async (gameId) => {
     if (gameId) {
-      const game = await firebaseService.getGame(gameId);
-      setGame(game);
-      localStorage.setItem('gameId', game.id);
+      if (game === null || game.id !== gameId) {
+        const game = await firebaseService.getGame(gameId);
+        setGame(game);
+        localStorage.setItem('gameId', game.id);
+      }
     }
   };
-
-  useEffect(() => {
-    const gameId = localStorage.getItem('gameId');
-    initializeGame(gameId);
-  }, []);
 
   const createGame = async (name, cards) => {
     const game = {
       name,
       cards,
       createdBy: userContext.user.id,
-      players: [userContext.user.id],
     };
     const createdGame = await firebaseService.createGame(game);
     localStorage.setItem('gameId', createdGame.id);
@@ -40,8 +36,18 @@ export const GameProvider = (props) => {
     return createdGame;
   };
 
+  const getPlayers = async () => {
+    return game.players;
+  };
+
+  const addPlayer = async (playerId, playerName) => {
+    firebaseService.addPlayerToGame(game.id, playerId, playerName);
+  };
+
   return (
-    <GameContext.Provider value={{ game, createGame, initializeGame }}>
+    <GameContext.Provider
+      value={{ game, createGame, initializeGame, addPlayer }}
+    >
       {props.children}
     </GameContext.Provider>
   );

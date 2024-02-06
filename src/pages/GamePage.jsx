@@ -8,7 +8,7 @@ import CreateUser from '../components/CreateUser';
 import { useUser } from '../context/UserContext';
 import { useGame } from '../context/GameContext';
 
-const Game = () => {
+const GamePage = () => {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -19,11 +19,24 @@ const Game = () => {
 
   useEffect(() => {
     if (!gameId) {
-      navigate('/create-game');
+      const storedGame = localStorage.getItem('gameId'); 
+      if (storedGame === null) {
+        navigate('/create-game');
+      } else {
+        navigate(`/game/${storedGame}`);
+      }
     } else {
       gameContext.initializeGame(gameId);
     }
   });
+
+  useEffect(() => {
+    if (gameContext.game !== null) {
+      if (userContext.user !== null) {
+        gameContext.addPlayer(userContext.user.id, userContext.user.name);
+      }
+    }
+  }, [userContext.user, gameContext.game])
 
   return (
     <>
@@ -39,4 +52,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default GamePage;

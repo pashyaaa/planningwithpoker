@@ -18,11 +18,10 @@ const HomePage = () => {
         outlineColor: '#74b3ff',
       }}
     >
-      {/* <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Welcome to Plannig Poker
-      </Typography> */}
+      </Typography>
       {userContext.user === null ? <CreateUser></CreateUser> : null}
-      <PokerTable></PokerTable>
     </Box>
   );
 };
