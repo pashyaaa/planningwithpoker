@@ -9,14 +9,14 @@ const PokerTable = () => {
           borderRadius: '2.8rem',
           gridArea: 'table',
           height: 'auto',
-          minHeight: '14rem',
+          minHeight: '12rem',
           padding: '0 1.6rem',
           position: 'relative',
           '@media (min-width: 920px)': {
-            minWidth: '33rem',
+            minWidth: '28rem',
           },
           '@media (max-width: 919px)': {
-            minWidth: '15rem',
+            minWidth: '14rem',
           },
         }}
       >

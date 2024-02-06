@@ -18,16 +18,16 @@ const GameArea = () => {
           display: 'inline-grid',
           gridTemplateColumns: '10rem 1fr 10rem',
           margin: '0 auto',
-          minWidth: '33rem',
+          minWidth: '28rem',
           minHeight: '200px',
           gridGap: '1rem',
         },
         '@media (max-width: 919px)': {
           display: 'grid',
           gridTemplateColumns: '8rem 1fr 8rem',
-          width: '44rem',
+          width: '40rem',
           minWidth: '15rem',
-          minHeight: '38rem',
+          minHeight: '32rem',
         },
       }}
     >

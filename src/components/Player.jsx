@@ -13,8 +13,8 @@ const Player = () => {
         sx={{
           background: '#e8e9ea',
           borderRadius: '0.8rem',
-          height: '6rem',
-          width: '4rem',
+          height: '5rem',
+          width: '3rem',
           flexShrink: '0',
         }}
       ></Box>
