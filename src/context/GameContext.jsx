@@ -27,17 +27,20 @@ export const GameProvider = (props) => {
   const initializeGame = async (gameId) => {
     if (gameId) {
       if (game === null || game.id !== gameId) {
-        if (unsubsribeGameListener) unsubsribeGameListener();
         const game = await firebaseService.getGame(gameId);
         setGame(game);
         localStorage.setItem('gameId', game.id);
-
-        unsubsribeGameListener = firebaseService.attachGameListener(
-          game.id,
-          onGameUpdate,
-        );
+        startGameListener(game.id);
       }
     }
+  };
+
+  const startGameListener = (gameId) => {
+    if (unsubsribeGameListener) unsubsribeGameListener();
+    unsubsribeGameListener = firebaseService.attachGameListener(
+      gameId,
+      onGameUpdate,
+    );
   };
 
   const onGameUpdate = (updatedGame) => {
@@ -54,6 +57,7 @@ export const GameProvider = (props) => {
     const createdGame = await firebaseService.createGame(game);
     localStorage.setItem('gameId', createdGame.id);
     setGame(createdGame);
+    startGameListener(createdGame.id);
     return createdGame;
   };
 
@@ -80,16 +84,16 @@ export const GameProvider = (props) => {
     }
     setGame(game);
     firebaseService.updateGame(game);
-  }
+  };
 
   const revealVotes = () => {
     game.currentRound.votesRevealed = true;
     let sum = 0;
     let count = 0;
-    Object.values(game.currentRound.votes).forEach(vote => {
+    Object.values(game.currentRound.votes).forEach((vote) => {
       sum += vote;
       count++;
-    })
+    });
 
     const average = sum / count;
 
@@ -97,16 +101,16 @@ export const GameProvider = (props) => {
 
     setGame(game);
     firebaseService.updateGame(game);
-  }
+  };
 
   const resetVotes = () => {
     game.currentRound.votesRevealed = false;
-    game.currentRound.votes = {}
+    game.currentRound.votes = {};
     game.currentRound.voteAverage = 0;
 
     setGame(game);
     firebaseService.updateGame(game);
-  }
+  };
 
   return (
     <GameContext.Provider
@@ -118,7 +122,7 @@ export const GameProvider = (props) => {
         players,
         setVote,
         revealVotes,
-        resetVotes
+        resetVotes,
       }}
     >
       {props.children}
