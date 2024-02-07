@@ -78,6 +78,8 @@ export const createGame = async (game) => {
     //TODO: make it configurable
     game.currentRound = {};
     game.currentRound.votes = {};
+    game.currentRound.votesRevealed = false;
+    game.currentRound.voteAverage = 0;
 
     const gameRef = await addDoc(gamesCollection, game);
     return { id: gameRef.id, ...game };

@@ -82,6 +82,32 @@ export const GameProvider = (props) => {
     firebaseService.updateGame(game);
   }
 
+  const revealVotes = () => {
+    game.currentRound.votesRevealed = true;
+    let sum = 0;
+    let count = 0;
+    Object.values(game.currentRound.votes).forEach(vote => {
+      sum += vote;
+      count++;
+    })
+
+    const average = sum / count;
+
+    game.currentRound.voteAverage = average;
+
+    setGame(game);
+    firebaseService.updateGame(game);
+  }
+
+  const resetVotes = () => {
+    game.currentRound.votesRevealed = false;
+    game.currentRound.votes = {}
+    game.currentRound.voteAverage = 0;
+
+    setGame(game);
+    firebaseService.updateGame(game);
+  }
+
   return (
     <GameContext.Provider
       value={{
@@ -90,7 +116,9 @@ export const GameProvider = (props) => {
         initializeGame,
         addPlayer,
         players,
-        setVote
+        setVote,
+        revealVotes,
+        resetVotes
       }}
     >
       {props.children}
