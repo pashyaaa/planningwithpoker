@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
-import * as firebaseService from '../firebase/frebaseService';
+import * as firebaseService from '../firebase/firebaseService';
 
 export const UserContext = createContext(null);
 

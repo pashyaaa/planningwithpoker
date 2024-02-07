@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from 'react';
 
-import * as firebaseService from '../firebase/frebaseService';
+import * as firebaseService from '../firebase/firebaseService';
 import { useUser } from './UserContext';
 
 export const GameContext = createContext(null);
