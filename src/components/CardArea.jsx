@@ -1,9 +1,22 @@
 import { Box, Button, List, ListItem, Typography } from '@mui/material';
 import { useGame } from '../context/GameContext';
+import { useState } from 'react';
 
 const CardArea = () => {
+  const [vote, setVote] = useState(null);
+
   const gameContext = useGame();
   const cardValues = gameContext.game.cards;
+
+  const voteButtonClickHanlder = (clickedVote) => {
+    if (vote == clickedVote) {
+      setVote(null);
+      gameContext.setVote(null);
+    } else {
+      setVote(clickedVote);
+      gameContext.setVote(clickedVote);
+    }
+  };
 
   return (
     <Box
@@ -55,17 +68,20 @@ const CardArea = () => {
                   sx={{
                     display: 'inline-block',
                     padding: 0,
-                    margin: '0 0.2rem',
+                    margin: '0 0.3rem',
+                    marginTop: vote === item ? '-0.8rem' : '0',
                     transition: 'all 0.1s linear',
                     verticalAlign: 'top',
                     whiteSpace: 'nowrap',
-                    ':hover': {
+                    ':hover': vote !== item ? {
                       marginTop: '-0.3rem',
-                    },
+                    } : null,
                   }}
                 >
                   <Button
+                    onClick={() => voteButtonClickHanlder(item)}
                     sx={{
+                      background: vote === item ? '#3993ff' : null,
                       border: '2px solid #3993ff',
                       cursor: 'pointer',
                       outline: '0',
@@ -80,7 +96,7 @@ const CardArea = () => {
                   >
                     <Typography
                       sx={{
-                        color: '#3993ff',
+                        color: vote === item ? '#ffffff' : '#3993ff',
                         fontWeight: 700,
                         marginY: 'auto',
                         fontSize: '19px',

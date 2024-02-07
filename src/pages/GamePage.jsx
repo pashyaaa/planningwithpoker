@@ -28,7 +28,7 @@ const GamePage = () => {
     } else {
       gameContext.initializeGame(gameId);
     }
-  });
+  }, [params]);
 
   useEffect(() => {
     if (gameContext.game !== null) {

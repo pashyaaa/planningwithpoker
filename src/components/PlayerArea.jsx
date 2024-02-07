@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import Player from './Player';
 
 const PlayerArea = ({ gridArea, players }) => {
-  console.log(gridArea, players);
   return (
     <Box
       sx={{

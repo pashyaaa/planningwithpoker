@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material';
+import { useGame } from '../context/GameContext';
 
 const Player = ({id, name}) => {
+  const gameContext = useGame();
   return (
     <Box
       sx={{
@@ -11,7 +13,7 @@ const Player = ({id, name}) => {
     >
       <Box
         sx={{
-          background: '#e8e9ea',
+          background: gameContext.game.currentRound.votes[id] ? '#3993ff' : '#e8e9ea',
           borderRadius: '0.8rem',
           height: '5rem',
           width: '3rem',
