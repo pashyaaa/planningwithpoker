@@ -19,6 +19,9 @@ const CardArea = () => {
   }, [gameContext]);
 
   const voteButtonClickHanlder = (clickedVote) => {
+    if (gameContext.game.currentRound.votesRevealed) {
+      return;
+    }
     if (vote == clickedVote) {
       setVote(null);
       gameContext.setVote(null);
