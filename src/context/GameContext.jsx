@@ -123,6 +123,7 @@ export const GameProvider = (props) => {
         setVote,
         revealVotes,
         resetVotes,
+        currentRound: game === null ? null : game.currentRound
       }}
     >
       {props.children}

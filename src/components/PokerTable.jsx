@@ -16,8 +16,8 @@ const PokerTable = () => {
     <Box
       sx={{
         boxShadow:
-          Object.keys(gameContext.game.currentRound.votes).length > 0
-            ? '0 0 50px 15px #48abe0'
+          Object.keys(gameContext.currentRound.votes).length > 0
+            ? '0 0 1rem 2px #48abe0'
             : null,
         display: 'flex',
         background: '#d7e9ff',
@@ -43,8 +43,8 @@ const PokerTable = () => {
           width: '100%',
         }}
       >
-        {gameContext.game.currentRound.votesRevealed === false ? (
-          Object.keys(gameContext.game.currentRound.votes).length > 0 && (
+        {gameContext.currentRound.votesRevealed === false ? (
+          Object.keys(gameContext.currentRound.votes).length > 0 && (
             <Button
               variant="contained"
               size="large"
@@ -66,7 +66,7 @@ const PokerTable = () => {
             }}
           >
             <Typography variant="h5" gutterBottom>
-              Avg: {gameContext.game.currentRound.voteAverage}
+              Avg: {gameContext.currentRound.voteAverage}
             </Typography>
             <Button
               variant="contained"

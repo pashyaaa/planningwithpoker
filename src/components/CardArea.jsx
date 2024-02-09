@@ -1,4 +1,4 @@
-import { Box, Button, List, ListItem, Typography } from '@mui/material';
+import { Box, List, ListItem, Typography } from '@mui/material';
 import { useGame } from '../context/GameContext';
 import { useEffect, useState } from 'react';
 import { useUser } from '../context/UserContext';
@@ -11,15 +11,15 @@ const CardArea = () => {
   const cardValues = gameContext.game.cards;
 
   useEffect(() => {
-    if (gameContext.game.currentRound.votes[userContext.user.id]) {
-      setVote(gameContext.game.currentRound.votes[userContext.user.id]);
+    if (gameContext.currentRound.votes[userContext.user.id]) {
+      setVote(gameContext.currentRound.votes[userContext.user.id]);
     } else {
       setVote(null);
     }
   }, [gameContext]);
 
   const voteButtonClickHanlder = (clickedVote) => {
-    if (gameContext.game.currentRound.votesRevealed) {
+    if (gameContext.currentRound.votesRevealed) {
       return;
     }
     if (vote == clickedVote) {
