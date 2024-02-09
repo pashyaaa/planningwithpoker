@@ -16,7 +16,7 @@ const CardArea = () => {
     } else {
       setVote(null);
     }
-  }, [gameContext])
+  }, [gameContext]);
 
   const voteButtonClickHanlder = (clickedVote) => {
     if (vote == clickedVote) {
@@ -83,38 +83,43 @@ const CardArea = () => {
                     transition: 'all 0.1s linear',
                     verticalAlign: 'top',
                     whiteSpace: 'nowrap',
-                    ':hover': vote !== item ? {
-                      marginTop: '-0.3rem',
-                    } : null,
+                    ':hover':
+                      vote !== item
+                        ? {
+                            marginTop: '-0.3rem',
+                          }
+                        : null,
                   }}
                 >
-                  <Button
+                  <Box
                     onClick={() => voteButtonClickHanlder(item)}
                     sx={{
+                      display: 'flex',
+                      alignContent: 'center',
+                      justifyContent: 'center',
                       background: vote === item ? '#3993ff' : null,
                       border: '2px solid #3993ff',
                       cursor: 'pointer',
                       outline: '0',
-                      textAlign: 'center',
                       transition: 'all 0.09s linear',
                       borderRadius: '0.8rem',
-                      fontSize: '19px',
                       height: '5rem',
                       width: '3rem',
                       minWidth: '3rem',
                     }}
                   >
                     <Typography
+                      variant="h3"
                       sx={{
                         color: vote === item ? '#ffffff' : '#3993ff',
-                        fontWeight: 700,
+                        fontWeight: 600,
                         marginY: 'auto',
-                        fontSize: '19px',
+                        fontSize: '1.6rem',
                       }}
                     >
                       {item}
                     </Typography>
-                  </Button>
+                  </Box>
                 </ListItem>
               );
             })}

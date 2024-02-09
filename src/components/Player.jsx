@@ -13,6 +13,9 @@ const Player = ({ id, name }) => {
     >
       <Box
         sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           background:
             gameContext.game.currentRound.votes[id] &&
             gameContext.game.currentRound.votesRevealed === false
@@ -22,17 +25,20 @@ const Player = ({ id, name }) => {
           height: '5rem',
           width: '3rem',
           flexShrink: '0',
-          textAlign: 'center'
+          textAlign: 'center',
+          border:
+            gameContext.game.currentRound.votes[id] &&
+            gameContext.game.currentRound.votesRevealed === true
+              ? '2px solid #3993ff'
+              : null,
         }}
       >
         {gameContext.game.currentRound.votesRevealed ? (
           <Typography
             sx={{
               color: '#3993ff',
-              fontWeight: 700,
-              marginY: 'auto',
-              fontSize: '1.8rem',
-              marginTop: '1rem'
+              fontWeight: 600,
+              fontSize: '1.6rem',
             }}
           >
             {gameContext.game.currentRound.votes[id]}
