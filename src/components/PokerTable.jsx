@@ -15,6 +15,10 @@ const PokerTable = () => {
   return (
     <Box
       sx={{
+        boxShadow:
+          Object.keys(gameContext.game.currentRound.votes).length > 0
+            ? '0 0 50px 15px #48abe0'
+            : null,
         display: 'flex',
         background: '#d7e9ff',
         borderRadius: '2.8rem',
@@ -41,7 +45,15 @@ const PokerTable = () => {
       >
         {gameContext.game.currentRound.votesRevealed === false ? (
           Object.keys(gameContext.game.currentRound.votes).length > 0 && (
-            <Button variant="contained" size="large" onClick={revealVotes}>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={revealVotes}
+              sx={{
+                borderRadius: '0.5rem',
+                backgroundColor: '#3993ff',
+              }}
+            >
               Reveal Votes
             </Button>
           )
@@ -53,10 +65,18 @@ const PokerTable = () => {
               alignItems: 'center',
             }}
           >
-            <Typography variant="h4">
-              {gameContext.game.currentRound.voteAverage}
+            <Typography variant="h5" gutterBottom>
+              Avg: {gameContext.game.currentRound.voteAverage}
             </Typography>
-            <Button variant="contained" size="large" onClick={resetVotes}>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={resetVotes}
+              sx={{
+                borderRadius: '0.5rem',
+                backgroundColor: '#3993ff',
+              }}
+            >
               Reset Votes
             </Button>
           </Box>

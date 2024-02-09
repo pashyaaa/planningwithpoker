@@ -9,14 +9,17 @@ import {
   Divider,
 } from '@mui/material';
 
-import { AccountCircle } from '@mui/icons-material';
+import {
+  AccountCircle,
+  Settings,
+  Logout,
+  ModeEditOutlineOutlined,
+} from '@mui/icons-material';
 
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import { useUser } from '../context/UserContext';
 
 const User = () => {
+  const userContext = useUser();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -76,14 +79,14 @@ const User = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem >
-          <Avatar /> Profile
+        <MenuItem>
+          <Avatar /> {userContext.user.name}
           <ListItemIcon>
-            <ModeEditOutlineOutlinedIcon fontSize="small" sx={{marginLeft: '2rem'}}  />
+            <ModeEditOutlineOutlined
+              fontSize="small"
+              sx={{ marginLeft: '2rem' }}
+            />
           </ListItemIcon>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
