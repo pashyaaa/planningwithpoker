@@ -109,12 +109,11 @@ const CardArea = () => {
                     }}
                   >
                     <Typography
-                      variant="h3"
+                      variant="h5"
                       sx={{
                         color: vote === item ? '#ffffff' : '#3993ff',
                         fontWeight: 600,
                         marginY: 'auto',
-                        fontSize: '1.6rem',
                       }}
                     >
                       {item}
