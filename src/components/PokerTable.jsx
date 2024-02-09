@@ -40,11 +40,19 @@ const PokerTable = () => {
         }}
       >
         {gameContext.game.currentRound.votesRevealed === false ? (
-          <Button variant="contained" size="large" onClick={revealVotes}>
-            Reveal Votes
-          </Button>
+          Object.keys(gameContext.game.currentRound.votes).length > 0 && (
+            <Button variant="contained" size="large" onClick={revealVotes}>
+              Reveal Votes
+            </Button>
+          )
         ) : (
-          <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
             <Typography variant="h4">
               {gameContext.game.currentRound.voteAverage}
             </Typography>
