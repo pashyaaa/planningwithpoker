@@ -31,7 +31,11 @@ const CreateGame = () => {
     const name = data.get('name');
     const cardsInput = data.get('cards');
 
-    if (!isGameNameValid(name) || !isCardValuesValid(cardsInput)) return;
+    if (
+      isGameNameValid(name) === false ||
+      isCardValuesValid(cardsInput) === false
+    )
+      return;
 
     const cards = cardsInput.split(',').map((num) => parseInt(num, 10));
 

@@ -24,7 +24,7 @@ const CreateUser = () => {
     const data = new FormData(e.currentTarget);
     const inputName = data.get('name');
 
-    if (isNameValid(inputName)) return;
+    if (isNameValid(inputName) === false) return;
 
     setShowSpinner(true);
     try {
