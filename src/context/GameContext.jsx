@@ -112,6 +112,22 @@ export const GameProvider = (props) => {
     firebaseService.updateGame(game);
   };
 
+  const updatePlayerName = async (playerId, playerName) => {
+    // No game then no need to change anything
+    if (game === null) return;
+
+    const newPlayers = game.players.map((player) => {
+      if (player.id === playerId) {
+        player.name = playerName;
+      }
+      return player;
+    });
+
+    game.players = newPlayers;
+    setGame(game);
+    await firebaseService.updateGame(game);
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -123,7 +139,8 @@ export const GameProvider = (props) => {
         setVote,
         revealVotes,
         resetVotes,
-        currentRound: game === null ? null : game.currentRound
+        currentRound: game === null ? null : game.currentRound,
+        updatePlayerName,
       }}
     >
       {props.children}

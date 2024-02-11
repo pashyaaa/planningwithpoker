@@ -17,10 +17,14 @@ import {
 } from '@mui/icons-material';
 
 import { useUser } from '../context/UserContext';
+import EditUserModal from './EditUserModal';
+
+
 
 const User = () => {
   const userContext = useUser();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,6 +38,10 @@ const User = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  
+  const handleEditUserClick = () => setEditUserModalOpen(true);
+  const handleModalClose = () => setEditUserModalOpen(false);
 
   return (
     <div>
@@ -79,7 +87,7 @@ const User = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <MenuItem onClick={handleEditUserClick}>
           <Avatar /> {userContext.user.name}
           <ListItemIcon>
             <ModeEditOutlineOutlined
@@ -102,6 +110,9 @@ const User = () => {
           Leave Game
         </MenuItem>
       </Menu>
+
+      <EditUserModal showModal={editUserModalOpen} closeModal={handleModalClose}></EditUserModal>
+   
     </div>
   );
 };

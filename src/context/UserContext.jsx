@@ -19,21 +19,25 @@ export const UserProvider = (props) => {
         setUser(user);
         localStorage.setItem('userId', user.id);
       }
-    }
+    };
 
     const userId = localStorage.getItem('userId');
     initializeExistingUser(userId);
-    
-  }, [])
+  }, []);
 
   const registerUser = async (user) => {
     const createdUser = await firebaseService.createUser(user);
     localStorage.setItem('userId', createdUser.id);
     setUser(createdUser);
-  }
+  };
+
+  const setNewUserName = async (name) => {
+    const updatedUser = await firebaseService.updateUser(user.id, { name });
+    setUser(updatedUser);
+  };
 
   return (
-    <UserContext.Provider value={{ user, registerUser }}>
+    <UserContext.Provider value={{ user, registerUser, setNewUserName }}>
       {props.children}
     </UserContext.Provider>
   );

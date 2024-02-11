@@ -38,6 +38,21 @@ export const getUser = async (userId) => {
   }
 };
 
+export const updateUser = async (userId, user) => {
+  if (!userId || !user) {
+    throw new Error('Invalid userId or user');
+  }
+
+  try {
+    const userRef = doc(db, 'users', userId);
+    await updateDoc(userRef, user);
+    return { ...user, id: userId };
+  } catch (e) {
+    console.log(`Error updating user: ${user.name}`);
+    throw new Error(`Error updating user: ${user.name}`);
+  }
+};
+
 export const createUser = async (user) => {
   if (!user || !user.name) {
     throw new Error('Invalid user');
