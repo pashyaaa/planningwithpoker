@@ -11,15 +11,23 @@ import CasinoIcon from '@mui/icons-material/Casino';
 
 import { useGame } from '../context/GameContext';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import Spinner from './Spinner';
 
 const CreateGame = () => {
   const gameContext = useGame();
   const navigate = useNavigate();
 
+  const [showSpinner, setShowSpinner] = useState(false);
+
   const exampleCardValues = ['1,2,3,4,5', '2,4,6,8,10', '1,2,3,5,8,13,21'];
 
   const submitGame = async (e) => {
     e.preventDefault();
+
+    setShowSpinner(true);
+
     const data = new FormData(e.currentTarget);
 
     const name = data.get('name');
@@ -31,6 +39,7 @@ const CreateGame = () => {
 
     const createdGame = await gameContext.createGame(name, cards);
 
+    setShowSpinner(false);
     navigate(`/game/${createdGame.id}`);
   };
 
@@ -55,6 +64,7 @@ const CreateGame = () => {
 
   return (
     <Container component="main" maxWidth="xs">
+      <Spinner showSpinner={showSpinner}></Spinner>
       <CssBaseline />
       <Box
         sx={{

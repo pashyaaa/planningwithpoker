@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   Avatar,
   Button,
@@ -9,17 +11,39 @@ import {
 import { AccountCircleOutlined } from '@mui/icons-material';
 
 import { useUser } from '../context/UserContext';
+import Spinner from './Spinner';
 
 const CreateUser = () => {
   const userContext = useUser();
 
-  const handleSubmit = (e) => {
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setShowSpinner(true);
+
     const data = new FormData(e.currentTarget);
-    userContext.registerUser({ name: data.get('name') });
+    const inputName = data.get('name');
+    
+    if (isNameValid(inputName)) return;
+
+    await userContext.registerUser({ name: inputName });
+
+    setShowSpinner(false);
   };
+
+  const isNameValid = (name) => {
+    if (name.trim() === '') {
+      return false;
+    }
+
+    return true;
+  }
+
   return (
     <Container component="main" maxWidth="xs">
+      <Spinner showSpinner={showSpinner}></Spinner>
       <CssBaseline />
       <Box
         sx={{
