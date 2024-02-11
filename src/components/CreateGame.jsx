@@ -25,11 +25,32 @@ const CreateGame = () => {
     const name = data.get('name');
     const cardsInput = data.get('cards');
 
+    if (!isGameNameValid(name) || !isCardValuesValid(cardsInput)) return;
+
     const cards = cardsInput.split(',').map((num) => parseInt(num, 10));
 
     const createdGame = await gameContext.createGame(name, cards);
 
     navigate(`/game/${createdGame.id}`);
+  };
+
+  const isGameNameValid = (gameName) => {
+    if (gameName.trim() === '') {
+      return false;
+    }
+    return true;
+  };
+
+  const isCardValuesValid = (cardValues) => {
+    const values = cardValues.trim();
+
+    if (values === '') return false;
+
+    const regex = /^\d+(,\d+)*/;
+
+    if (!regex.test(values)) return false;
+
+    return true;
   };
 
   return (
