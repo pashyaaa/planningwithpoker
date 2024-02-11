@@ -30,7 +30,7 @@ const GameArea = () => {
             "left top right"
             "left table right"
             "left bottom right"`,
-        gridTemplateRows: 'auto 1fr auto',
+        gridTemplateRows: '8rem 1fr 8rem',
         gap: '1rem 0',
         '@media (min-width: 920px)': {
           display: 'inline-grid',
