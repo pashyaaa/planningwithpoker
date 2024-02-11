@@ -10,7 +10,7 @@ import { AccountCircleOutlined } from '@mui/icons-material';
 
 import { useUser } from '../context/UserContext';
 
-const UserInput = () => {
+const CreateUser = () => {
   const userContext = useUser();
 
   const handleSubmit = (e) => {
@@ -57,4 +57,4 @@ const UserInput = () => {
   );
 };
 
-export default UserInput;
+export default CreateUser;

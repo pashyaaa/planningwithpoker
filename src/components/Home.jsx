@@ -2,7 +2,6 @@ import { Typography, Box } from '@mui/material';
 
 import { useUser } from '../context/UserContext';
 import CreateUser from './CreateUser';
-import PokerTable from './PokerTable';
 
 const HomePage = () => {
   const userContext = useUser();

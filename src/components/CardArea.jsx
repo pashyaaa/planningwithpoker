@@ -22,7 +22,7 @@ const CardArea = () => {
     if (gameContext.currentRound.votesRevealed) {
       return;
     }
-    if (vote == clickedVote) {
+    if (vote === clickedVote) {
       setVote(null);
       gameContext.setVote(null);
     } else {
