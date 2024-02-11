@@ -38,17 +38,23 @@ const EditUserModal = ({ showModal, closeModal }) => {
   const [inputName, setInputName] = useState('');
   const [showSpinner, setShowSpinner] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowSpinner(true);
     const data = new FormData(e.currentTarget);
     const newName = data.get('name');
-    userContext.setNewUserName(newName).then(() => {
-      gameContext.updatePlayerName(userContext.user.id, newName).then(() => {
-        setShowSpinner(false);
-        closeModal();
-      });
-    });
+
+    if (newName.trim() === '') return;
+
+    setShowSpinner(true);
+    try {
+      await userContext.setNewUserName(newName);
+      await gameContext.updatePlayerName(userContext.user.id, newName);
+      closeModal();
+    } catch (e) {
+      console.error(`Error updating name ${e}`);
+    }
+
+    setShowSpinner(false);
   };
 
   useEffect(() => {

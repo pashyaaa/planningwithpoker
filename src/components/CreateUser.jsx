@@ -21,14 +21,17 @@ const CreateUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setShowSpinner(true);
-
     const data = new FormData(e.currentTarget);
     const inputName = data.get('name');
-    
+
     if (isNameValid(inputName)) return;
 
-    await userContext.registerUser({ name: inputName });
+    setShowSpinner(true);
+    try {
+      await userContext.registerUser({ name: inputName });
+    } catch (e) {
+      console.error(`Error creating user ${e}`);
+    }
 
     setShowSpinner(false);
   };
@@ -39,7 +42,7 @@ const CreateUser = () => {
     }
 
     return true;
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">

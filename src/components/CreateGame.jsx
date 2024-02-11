@@ -26,8 +26,6 @@ const CreateGame = () => {
   const submitGame = async (e) => {
     e.preventDefault();
 
-    setShowSpinner(true);
-
     const data = new FormData(e.currentTarget);
 
     const name = data.get('name');
@@ -37,10 +35,15 @@ const CreateGame = () => {
 
     const cards = cardsInput.split(',').map((num) => parseInt(num, 10));
 
-    const createdGame = await gameContext.createGame(name, cards);
+    setShowSpinner(true);
+    try {
+      const createdGame = await gameContext.createGame(name, cards);
+      navigate(`/game/${createdGame.id}`);
+    } catch (e) {
+      console.error(`Error creating game ${e}`);
+    }
 
     setShowSpinner(false);
-    navigate(`/game/${createdGame.id}`);
   };
 
   const isGameNameValid = (gameName) => {
