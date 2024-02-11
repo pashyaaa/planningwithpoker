@@ -44,7 +44,7 @@ const PokerTable = () => {
         }}
       >
         {gameContext.currentRound.votesRevealed === false ? (
-          Object.keys(gameContext.currentRound.votes).length > 0 && (
+          Object.keys(gameContext.currentRound.votes).length > 0 ? (
             <Button
               variant="contained"
               size="large"
@@ -56,6 +56,8 @@ const PokerTable = () => {
             >
               Reveal Votes
             </Button>
+          ) : (
+            <Typography variant="h6">Pick your cards!</Typography>
           )
         ) : (
           <Box
