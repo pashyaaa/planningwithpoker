@@ -16,15 +16,11 @@ export const GameProvider = (props) => {
 
   const [players, setPlayers] = useState([]);
 
-  const [unsubsribeGameListener, setUnsubsribeGameListener] = useState(null);
+  let unsubsribeGameListener;
 
   useEffect(() => {
     if (game && game.players) {
       setPlayers(game.players);
-    }
-
-    return () => {
-      if (unsubsribeGameListener) unsubsribeGameListener();
     }
   }, [game]);
 
@@ -41,12 +37,10 @@ export const GameProvider = (props) => {
 
   const startGameListener = (gameId) => {
     if (unsubsribeGameListener) unsubsribeGameListener();
-    const unsubscribeListener = firebaseService.attachGameListener(
+    unsubsribeGameListener = firebaseService.attachGameListener(
       gameId,
       onGameUpdate,
     );
-
-    setUnsubsribeGameListener(unsubscribeListener);
   };
 
   const onGameUpdate = (updatedGame) => {
