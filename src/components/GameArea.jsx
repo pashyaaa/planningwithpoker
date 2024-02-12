@@ -6,7 +6,6 @@ import { useGame } from '../context/GameContext';
 import { useEffect, useState } from 'react';
 
 const GameArea = () => {
-
   const gameContext = useGame();
   const [firstBlock, setFirstBlock] = useState([]);
   const [secondBlock, setSecondBlock] = useState([]);
@@ -15,13 +14,17 @@ const GameArea = () => {
 
   useEffect(() => {
     const players = gameContext.players;
-    const playersPerBlock = Math.ceil(players.length/4);
-    setFirstBlock(players.slice(0, playersPerBlock));
-    setSecondBlock(players.slice(playersPerBlock, playersPerBlock*2));
-    setThirdBlock(players.slice(playersPerBlock*2, playersPerBlock*3));
-    setFourthBlock(players.slice(playersPerBlock*3, playersPerBlock*4));
-  }, [gameContext, gameContext.game, gameContext.players])
-
+    const playerDistribution = [[], [], [], []];
+    let ctr = 0;
+    for (const p of players) {
+      playerDistribution[ctr].push(p);
+      ctr = (ctr + 1) % 4;
+    }
+    setFirstBlock(playerDistribution[0]);
+    setSecondBlock(playerDistribution[1]);
+    setThirdBlock(playerDistribution[2]);
+    setFourthBlock(playerDistribution[3]);
+  }, [gameContext.players]);
 
   return (
     <Box
