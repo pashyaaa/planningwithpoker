@@ -24,7 +24,7 @@ const PokerTable = () => {
         borderRadius: '2.8rem',
         gridArea: 'table',
         height: 'auto',
-        minHeight: '11rem',
+        minHeight: '10rem',
         padding: '0 1.6rem',
         position: 'relative',
         '@media (min-width: 920px)': {

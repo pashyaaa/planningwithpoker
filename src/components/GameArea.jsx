@@ -46,8 +46,8 @@ const GameArea = () => {
           display: 'grid',
           gridTemplateColumns: '8rem 1fr 8rem',
           width: '40rem',
-          minWidth: '15rem',
-          minHeight: '32rem',
+          minWidth: '13rem',
+          minHeight: '22rem',
         },
       }}
     >
