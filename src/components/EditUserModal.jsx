@@ -15,6 +15,8 @@ import {
 import { useUser } from '../context/UserContext';
 import Spinner from './Spinner';
 import { useGame } from '../context/GameContext';
+import UserProfilePicture from './UserProfiePicture';
+
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -119,7 +121,8 @@ const EditUserModal = ({ showModal, closeModal }) => {
               marginLeft: '1rem',
             }}
           >
-            <Avatar
+            <UserProfilePicture></UserProfilePicture>
+            {/* <Avatar
               alt="Profile Picture"
               src={
                 userContext.profilePictureUrl
@@ -131,7 +134,7 @@ const EditUserModal = ({ showModal, closeModal }) => {
                 height: '5rem',
                 marginRight: '0.5rem',
               }}
-            ></Avatar>
+            ></Avatar> */}
 
             <Box
               sx={{

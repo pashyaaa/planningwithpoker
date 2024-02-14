@@ -18,8 +18,7 @@ import {
 
 import { useUser } from '../context/UserContext';
 import EditUserModal from './EditUserModal';
-
-
+import UserProfilePicture from './UserProfiePicture';
 
 const User = () => {
   const userContext = useUser();
@@ -39,7 +38,6 @@ const User = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  
   const handleEditUserClick = () => setEditUserModalOpen(true);
   const handleModalClose = () => setEditUserModalOpen(false);
 
@@ -53,7 +51,11 @@ const User = () => {
         onClick={handleMenu}
         color="inherit"
       >
-        <AccountCircle />
+        {userContext.userProfilePictureUrl ? (
+          <UserProfilePicture />
+        ) : (
+          <AccountCircle />
+        )}
       </IconButton>
       <Menu
         anchorEl={anchorEl}
@@ -88,7 +90,7 @@ const User = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleEditUserClick}>
-          <Avatar /> {userContext.user.name}
+          <UserProfilePicture></UserProfilePicture> {userContext.user.name}
           <ListItemIcon>
             <ModeEditOutlineOutlined
               fontSize="small"
@@ -111,8 +113,10 @@ const User = () => {
         </MenuItem>
       </Menu>
 
-      <EditUserModal showModal={editUserModalOpen} closeModal={handleModalClose}></EditUserModal>
-   
+      <EditUserModal
+        showModal={editUserModalOpen}
+        closeModal={handleModalClose}
+      ></EditUserModal>
     </div>
   );
 };
