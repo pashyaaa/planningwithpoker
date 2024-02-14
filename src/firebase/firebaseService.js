@@ -1,5 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import {
+  connectStorageEmulator,
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage';
+
+import {
   addDoc,
   collection,
   connectFirestoreEmulator,
@@ -14,8 +22,11 @@ import firebaseConfig from './firebaseConfig';
 
 initializeApp(firebaseConfig);
 
+const storage = getStorage();
+
 const db = getFirestore();
-connectFirestoreEmulator(db, '127.0.0.1', 8080);
+connectFirestoreEmulator(db, '146.122.176.191', 444);
+connectStorageEmulator(storage, '146.122.176.191', 9199);
 
 const usersCollection = collection(db, 'users');
 const gamesCollection = collection(db, 'games');
@@ -178,5 +189,28 @@ export const addPlayerToGame = async (gameId, playerId, playerName) => {
     throw new Error(
       `Failed to update game with the current players: ${gameId}`,
     );
+  }
+};
+
+export const uploadImage = async (userId, imageFile) => {
+  const inputImageNameParts = imageFile.name.split('.');
+  const imageExtension = inputImageNameParts[inputImageNameParts.length - 1];
+
+  const newImageFileName = `${userId}.${imageExtension}`;
+  const imageStorageRef = ref(storage, `images/${newImageFileName}`);
+
+  const snapshot = await uploadBytes(imageStorageRef, imageFile);
+
+  return snapshot;
+};
+
+export const getImageUrl = async (imageName) => {
+  const imageStorageRef = ref(storage, `images/${imageName}`);
+
+  try {
+    const url = await getDownloadURL(imageStorageRef);
+    return url;
+  } catch (e) {
+    return null;
   }
 };

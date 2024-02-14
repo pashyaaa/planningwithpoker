@@ -1,13 +1,13 @@
-<mxfile host="Electron" modified="2024-01-15T20:49:41.310Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.16 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="9rva9731VkQhbhqODAFL" version="22.1.16" type="device">
+<mxfile host="Electron" modified="2024-02-13T06:22:03.784Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="hNOr2QtpcGXTT86Y9sHK" version="21.2.8" type="device">
   <diagram name="Page-1" id="kChWD3CBWGvnKykgN-4D">
-    <mxGraphModel dx="875" dy="518" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1036" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="UvZMD-2VnwtQ3c2eiytE-2" value="Game&lt;span style=&quot;white-space: pre;&quot;&gt; &lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="40" y="40" width="190" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="UvZMD-2VnwtQ3c2eiytE-3" value="- id: string&lt;br&gt;- name: string&lt;br&gt;- createdBy: User&lt;br&gt;- players: User[]&lt;br&gt;- rounds: Round[]&lt;br&gt;- currentRound: Round" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="UvZMD-2VnwtQ3c2eiytE-2" vertex="1">
+        <mxCell id="UvZMD-2VnwtQ3c2eiytE-3" value="- id: string&lt;br&gt;- name: string&lt;br&gt;- createdBy: User&lt;br&gt;- players: User[]&lt;br&gt;- rounds: Round[]&lt;br&gt;- currentRound: Round&lt;br&gt;- cards: Number[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="UvZMD-2VnwtQ3c2eiytE-2" vertex="1">
           <mxGeometry y="26" width="190" height="114" as="geometry" />
         </mxCell>
         <mxCell id="UvZMD-2VnwtQ3c2eiytE-4" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="UvZMD-2VnwtQ3c2eiytE-2" vertex="1">
@@ -83,7 +83,7 @@
         <mxCell id="hA1tROzSgOuJghpeb_aW-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=diamondThin;endFill=1;strokeWidth=2;endSize=10;" parent="1" source="UvZMD-2VnwtQ3c2eiytE-15" target="hA1tROzSgOuJghpeb_aW-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JdkQtnMdD85TaPqNwOqg-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=0;endSize=10;entryX=0;entryY=0.161;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.008;exitY=0.097;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="UvZMD-2VnwtQ3c2eiytE-2" target="UvZMD-2VnwtQ3c2eiytE-6">
+        <mxCell id="JdkQtnMdD85TaPqNwOqg-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=diamondThin;endFill=0;endSize=10;entryX=0;entryY=0.161;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.008;exitY=0.097;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="UvZMD-2VnwtQ3c2eiytE-2" target="UvZMD-2VnwtQ3c2eiytE-6" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="260" y="60" />
