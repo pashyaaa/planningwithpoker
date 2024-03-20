@@ -19,9 +19,14 @@ import {
 import { useUser } from '../context/UserContext';
 import EditUserModal from './EditUserModal';
 import UserProfilePicture from './UserProfiePicture';
+import { useGame } from '../context/GameContext';
+import { useNavigate } from 'react-router-dom';
 
 const User = () => {
+  const navigate = useNavigate();
+
   const userContext = useUser();
+  const gameContext = useGame();
   const [anchorEl, setAnchorEl] = useState(null);
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
@@ -31,6 +36,14 @@ const User = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLeaveGame = async () => {
+    setAnchorEl(null);
+
+    navigate('/create-game');
+
+    await gameContext.leaveGame();
   };
 
   const open = Boolean(anchorEl);
@@ -105,7 +118,7 @@ const User = () => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLeaveGame}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

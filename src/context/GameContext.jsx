@@ -128,6 +128,19 @@ export const GameProvider = (props) => {
     await firebaseService.updateGame(game);
   };
 
+  const leaveGame = async () => {
+    if (game === null) return;
+
+    const newPlayers = game.players.filter(
+      (player) => player.id !== userContext.user.id,
+    );
+
+    game.players = newPlayers;
+    setGame(game);
+    localStorage.removeItem('gameId');
+    await firebaseService.updateGame(game);
+  }
+
   return (
     <GameContext.Provider
       value={{
@@ -141,6 +154,7 @@ export const GameProvider = (props) => {
         resetVotes,
         currentRound: game === null ? null : game.currentRound,
         updatePlayerName,
+        leaveGame
       }}
     >
       {props.children}
