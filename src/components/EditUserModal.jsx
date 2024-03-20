@@ -143,14 +143,15 @@ const EditUserModal = ({ showModal, closeModal }) => {
                 justifyContent: 'center',
               }}
             >
-              <Button variant="text" component="label">
+
+              {/* <Button variant="text" component="label">
                 <Typography> Upload new picture </Typography>
                 <VisuallyHiddenInput
                   type="file"
                   onChange={onProfilePictureFileSelected}
                   accept="image/*"
                 ></VisuallyHiddenInput>
-              </Button>
+              </Button> */}
               {userContext.profilePictureUrl && (
                 <Button variant="text">
                   <Typography color={'#f24f21'}>Delete picture</Typography>

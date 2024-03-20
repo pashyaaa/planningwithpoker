@@ -25,8 +25,8 @@ initializeApp(firebaseConfig);
 const storage = getStorage();
 
 const db = getFirestore();
-connectFirestoreEmulator(db, '146.122.176.191', 444);
-connectStorageEmulator(storage, '146.122.176.191', 9199);
+// connectFirestoreEmulator(db, 'localhost', 445);
+// connectStorageEmulator(storage, 'localhost', 9199);
 
 const usersCollection = collection(db, 'users');
 const gamesCollection = collection(db, 'games');
